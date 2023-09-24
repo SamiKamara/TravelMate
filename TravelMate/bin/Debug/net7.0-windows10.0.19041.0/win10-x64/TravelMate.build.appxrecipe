@@ -877,6 +877,24 @@
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-100.png">
+      <PackagePath>planeicon.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-125.png">
+      <PackagePath>planeicon.scale-125.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-150.png">
+      <PackagePath>planeicon.scale-150.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-200.png">
+      <PackagePath>planeicon.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-400.png">
+      <PackagePath>planeicon.scale-400.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\unholy.scale-100.png">
+      <PackagePath>unholy.scale-100.png</PackagePath>
+    </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
     <ResolvedSDKReference Include="C:\Users\Sami\.nuget\packages\microsoft.windowsappsdk\1.2.221209.1\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.2.msix">

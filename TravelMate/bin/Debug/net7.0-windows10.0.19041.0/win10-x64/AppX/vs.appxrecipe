@@ -29,13 +29,13 @@
     <AppXManifest Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-09-23T22:48:15.729</Modified>
+      <Modified>2023-09-24T14:00:34.309</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-09-23T22:48:15.406</Modified>
+      <Modified>2023-09-24T13:50:08.792</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\TravelMate.runtimeconfig.json">
       <PackagePath>TravelMate.runtimeconfig.json</PackagePath>
@@ -43,15 +43,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\TravelMate.dll">
       <PackagePath>TravelMate.dll</PackagePath>
-      <Modified>2023-09-23T22:48:14.287</Modified>
+      <Modified>2023-09-24T14:00:33.162</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>TravelMate.exe</PackagePath>
-      <Modified>2023-09-23T22:48:14.309</Modified>
+      <Modified>2023-09-24T14:00:33.168</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\TravelMate.deps.json">
       <PackagePath>TravelMate.deps.json</PackagePath>
-      <Modified>2023-09-23T20:29:31.222</Modified>
+      <Modified>2023-09-24T13:50:08.731</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.11\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -967,207 +967,231 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
       <PackagePath>appicon.ico</PackagePath>
-      <Modified>2023-09-23T20:25:57.274</Modified>
+      <Modified>2023-09-24T13:49:33.311</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-100.png">
       <PackagePath>appiconLargeTile.scale-100.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.274</Modified>
+      <Modified>2023-09-24T13:49:33.551</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-125.png">
       <PackagePath>appiconLargeTile.scale-125.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.275</Modified>
+      <Modified>2023-09-24T13:49:33.562</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png">
       <PackagePath>appiconLargeTile.scale-150.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.276</Modified>
+      <Modified>2023-09-24T13:49:33.572</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png">
       <PackagePath>appiconLargeTile.scale-200.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.277</Modified>
+      <Modified>2023-09-24T13:49:33.587</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
       <PackagePath>appiconLargeTile.scale-400.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.277</Modified>
+      <Modified>2023-09-24T13:49:33.646</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-16.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.278</Modified>
+      <Modified>2023-09-24T13:49:33.381</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-24.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.279</Modified>
+      <Modified>2023-09-24T13:49:33.384</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-256.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.279</Modified>
+      <Modified>2023-09-24T13:49:33.398</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-32.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.280</Modified>
+      <Modified>2023-09-24T13:49:33.386</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-48.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.281</Modified>
+      <Modified>2023-09-24T13:49:33.389</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-16.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.281</Modified>
+      <Modified>2023-09-24T13:49:33.359</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-24.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.282</Modified>
+      <Modified>2023-09-24T13:49:33.363</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-256.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.283</Modified>
+      <Modified>2023-09-24T13:49:33.378</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-32.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.284</Modified>
+      <Modified>2023-09-24T13:49:33.366</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-48.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.285</Modified>
+      <Modified>2023-09-24T13:49:33.370</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png">
       <PackagePath>appiconLogo.scale-100.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.285</Modified>
+      <Modified>2023-09-24T13:49:33.319</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png">
       <PackagePath>appiconLogo.scale-125.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.286</Modified>
+      <Modified>2023-09-24T13:49:33.322</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-150.png">
       <PackagePath>appiconLogo.scale-150.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.287</Modified>
+      <Modified>2023-09-24T13:49:33.325</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-200.png">
       <PackagePath>appiconLogo.scale-200.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.288</Modified>
+      <Modified>2023-09-24T13:49:33.328</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-400.png">
       <PackagePath>appiconLogo.scale-400.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.288</Modified>
+      <Modified>2023-09-24T13:49:33.338</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-16.png">
       <PackagePath>appiconLogo.targetsize-16.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.289</Modified>
+      <Modified>2023-09-24T13:49:33.341</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-24.png">
       <PackagePath>appiconLogo.targetsize-24.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.290</Modified>
+      <Modified>2023-09-24T13:49:33.343</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-256.png">
       <PackagePath>appiconLogo.targetsize-256.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.291</Modified>
+      <Modified>2023-09-24T13:49:33.356</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-32.png">
       <PackagePath>appiconLogo.targetsize-32.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.291</Modified>
+      <Modified>2023-09-24T13:49:33.346</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-48.png">
       <PackagePath>appiconLogo.targetsize-48.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.292</Modified>
+      <Modified>2023-09-24T13:49:33.349</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-100.png">
       <PackagePath>appiconMediumTile.scale-100.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.293</Modified>
+      <Modified>2023-09-24T13:49:33.448</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-125.png">
       <PackagePath>appiconMediumTile.scale-125.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.293</Modified>
+      <Modified>2023-09-24T13:49:33.453</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-150.png">
       <PackagePath>appiconMediumTile.scale-150.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.294</Modified>
+      <Modified>2023-09-24T13:49:33.458</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-200.png">
       <PackagePath>appiconMediumTile.scale-200.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.295</Modified>
+      <Modified>2023-09-24T13:49:33.467</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-400.png">
       <PackagePath>appiconMediumTile.scale-400.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.296</Modified>
+      <Modified>2023-09-24T13:49:33.481</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-100.png">
       <PackagePath>appiconSmallTile.scale-100.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.296</Modified>
+      <Modified>2023-09-24T13:49:33.425</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-125.png">
       <PackagePath>appiconSmallTile.scale-125.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.297</Modified>
+      <Modified>2023-09-24T13:49:33.428</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-150.png">
       <PackagePath>appiconSmallTile.scale-150.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.298</Modified>
+      <Modified>2023-09-24T13:49:33.432</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-200.png">
       <PackagePath>appiconSmallTile.scale-200.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.299</Modified>
+      <Modified>2023-09-24T13:49:33.436</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-400.png">
       <PackagePath>appiconSmallTile.scale-400.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.299</Modified>
+      <Modified>2023-09-24T13:49:33.444</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-100.png">
       <PackagePath>appiconStoreLogo.scale-100.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.300</Modified>
+      <Modified>2023-09-24T13:49:33.401</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-125.png">
       <PackagePath>appiconStoreLogo.scale-125.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.301</Modified>
+      <Modified>2023-09-24T13:49:33.405</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-150.png">
       <PackagePath>appiconStoreLogo.scale-150.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.301</Modified>
+      <Modified>2023-09-24T13:49:33.409</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-200.png">
       <PackagePath>appiconStoreLogo.scale-200.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.302</Modified>
+      <Modified>2023-09-24T13:49:33.414</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-400.png">
       <PackagePath>appiconStoreLogo.scale-400.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.303</Modified>
+      <Modified>2023-09-24T13:49:33.422</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-100.png">
       <PackagePath>appiconWideTile.scale-100.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.304</Modified>
+      <Modified>2023-09-24T13:49:33.487</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-125.png">
       <PackagePath>appiconWideTile.scale-125.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.305</Modified>
+      <Modified>2023-09-24T13:49:33.493</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png">
       <PackagePath>appiconWideTile.scale-150.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.305</Modified>
+      <Modified>2023-09-24T13:49:33.501</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png">
       <PackagePath>appiconWideTile.scale-200.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.306</Modified>
+      <Modified>2023-09-24T13:49:33.513</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
       <PackagePath>appiconWideTile.scale-400.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.307</Modified>
+      <Modified>2023-09-24T13:49:33.542</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
       <PackagePath>dotnet_bot.scale-100.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.308</Modified>
+      <Modified>2023-09-24T13:49:33.308</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png">
       <PackagePath>dotnet_bot.scale-125.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.308</Modified>
+      <Modified>2023-09-24T13:49:33.318</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png">
       <PackagePath>dotnet_bot.scale-150.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.309</Modified>
+      <Modified>2023-09-24T13:49:33.331</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png">
       <PackagePath>dotnet_bot.scale-200.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.310</Modified>
+      <Modified>2023-09-24T13:49:33.354</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
-      <Modified>2023-09-23T20:25:57.312</Modified>
+      <Modified>2023-09-24T13:49:33.408</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-100.png">
+      <PackagePath>planeicon.scale-100.png</PackagePath>
+      <Modified>2023-09-24T13:49:33.304</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-125.png">
+      <PackagePath>planeicon.scale-125.png</PackagePath>
+      <Modified>2023-09-24T13:49:33.305</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-150.png">
+      <PackagePath>planeicon.scale-150.png</PackagePath>
+      <Modified>2023-09-24T13:49:33.307</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-200.png">
+      <PackagePath>planeicon.scale-200.png</PackagePath>
+      <Modified>2023-09-24T13:49:33.308</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\planeicon.scale-400.png">
+      <PackagePath>planeicon.scale-400.png</PackagePath>
+      <Modified>2023-09-24T13:49:33.311</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\unholy.scale-100.png">
+      <PackagePath>unholy.scale-100.png</PackagePath>
+      <Modified>2023-09-13T11:54:32.148</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
