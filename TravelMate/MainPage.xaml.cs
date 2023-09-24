@@ -1,24 +1,17 @@
-﻿namespace TravelMate
-{
-    public partial class MainPage : ContentPage
-    {
-        int count = 0;
+﻿using Microsoft.Maui.Controls;
 
+namespace TravelMate
+{
+    public partial class MainPage
+    {
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void OnNextClicked(object sender, EventArgs e)
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            // For now, does nothing when the button is clicked.
         }
     }
 }
