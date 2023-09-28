@@ -29,7 +29,7 @@
     <AppXManifest Include="C:\Users\Sami\Desktop\TravelMate\TravelMate\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-09-25T11:32:00.384</Modified>
+      <Modified>2023-09-28T11:16:25.959</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
