@@ -12,6 +12,9 @@
     <MauiXaml Update="MainPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="ResultsPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="WeatherPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

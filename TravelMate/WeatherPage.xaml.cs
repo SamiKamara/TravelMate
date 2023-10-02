@@ -9,6 +9,11 @@ namespace TravelMate
             InitializeComponent();
         }
 
+        private void OnViewResultsClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ResultsPage());
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
