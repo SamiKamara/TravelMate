@@ -12,7 +12,6 @@ namespace TravelMate
         private void OnNextClicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new WeatherPage());
-            //all kinds of stuff related to getting the routes should be added here
         }
 
         protected override void OnAppearing()

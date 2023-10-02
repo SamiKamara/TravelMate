@@ -1,6 +1,7 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TravelMate.MainPage">
+             x:Class="TravelMate.MainPage"
+             BackgroundColor="{StaticResource DefaultBackgroundColor}">
     <ScrollView>
         <Grid Padding="30,0"
               VerticalOptions="Center">
@@ -63,7 +64,7 @@
 
             <!-- background graphic to be added here when its rdy -->
             <Image Grid.Column="1" 
-                   Source="unholy.png"
+                   Source="mainright.png"
                    Aspect="AspectFit"
                    VerticalOptions="Center"
                    HorizontalOptions="Center" />
