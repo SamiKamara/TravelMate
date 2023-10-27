@@ -32,6 +32,7 @@
                      VerticalOptions="Center"
                      HorizontalOptions="Start"
                      FontAttributes="Bold"
+                     CharacterSpacing="-1.2"
                      TextColor="#01bae8"
                      FontSize="40"
                      Margin="0,0,0,0"/>
@@ -40,6 +41,7 @@
                    VerticalOptions="Center"
                    HorizontalOptions="Start"
                    FontAttributes="Bold"
+                   CharacterSpacing="-1.2"
                    FontSize="40"
                    Margin="0,0,0,20"/>
 
@@ -50,6 +52,7 @@
                        Margin="0,0,0,20"
                        Padding="0">
                     <Entry Placeholder="From"
+                           CharacterSpacing="0.6"
                            PlaceholderColor="White"
                            HorizontalOptions="FillAndExpand"
                            VerticalOptions="Center" />
@@ -61,6 +64,7 @@
                        CornerRadius="5"
                        Padding="0">
                     <Entry Placeholder="To"
+                           CharacterSpacing="0.6"
                            PlaceholderColor="White"
                            HorizontalOptions="FillAndExpand"
                            VerticalOptions="Center" />
