@@ -10,7 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -55,6 +55,7 @@
                 FontSize="32"
                 HorizontalOptions="Start"
                 Text="Choose the desired weather conditions on arrival" />
+
         </StackLayout>
 
         <Image
@@ -67,14 +68,77 @@
             VerticalOptions="Center"
             WidthRequest="150" />
 
+        <Frame
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            BackgroundColor="#2A2D3E"
+            BorderColor="Transparent"
+            CornerRadius="10">
 
+            <StackLayout
+                HorizontalOptions="Center"
+                Orientation="Vertical"
+                VerticalOptions="Center">
 
+                <StackLayout Margin="0,0,0,30" Orientation="Horizontal">
+                    <Label
+                        Margin="0,0,75,0"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Temperature" />
+                    <Slider
+                        x:Name="TemperatureSlider"
+                        Maximum="32"
+                        Minimum="-32"
+                        WidthRequest="300"
+                        Value="0" />
+                </StackLayout>
 
+                <StackLayout Margin="0,0,0,30" Orientation="Horizontal">
+                    <Label
+                        Margin="0,0,60,0"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Chance of Rain" />
+                    <Slider
+                        x:Name="RainSlider"
+                        Maximum="100"
+                        Minimum="0"
+                        WidthRequest="300"
+                        Value="0" />
+                </StackLayout>
 
+                <StackLayout Margin="0,0,0,30" Orientation="Horizontal">
+                    <Label
+                        Margin="0,0,94,0"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Cloudiness" />
+                    <Slider
+                        x:Name="CloudinessSlider"
+                        Maximum="100"
+                        Minimum="0"
+                        WidthRequest="300"
+                        Value="0" />
+                </StackLayout>
 
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        Margin="0,0,85,0"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Wind Speed" />
+                    <Slider
+                        x:Name="WindspeedSlider"
+                        Maximum="100"
+                        Minimum="0"
+                        WidthRequest="300"
+                        Value="0" />
+                </StackLayout>
 
-
-
+            </StackLayout>
+        </Frame>
 
     </Grid>
 
