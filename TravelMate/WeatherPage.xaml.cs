@@ -18,6 +18,12 @@ namespace TravelMate
         {
             base.OnAppearing();
             NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);
+        }
+
+        private void OnBackButtonClicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
         }
     }
 }
