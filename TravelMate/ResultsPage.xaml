@@ -4,11 +4,6 @@
              Title="ResultsPage"
              BackgroundColor="{StaticResource DefaultBackgroundColor}">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-
         <Entry x:Name="StartCoords" Placeholder="Start Coordinates (lat,lng)" />
         <Entry x:Name="EndCoords" Placeholder="End Coordinates (lat,lng)" />
         <Button Text="Temporary debug Button to get route data" Clicked="OnGetRouteClicked" />
