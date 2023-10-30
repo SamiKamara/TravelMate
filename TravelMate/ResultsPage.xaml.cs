@@ -12,24 +12,82 @@ namespace TravelMate
 
         private async void OnGetRouteClicked(object sender, EventArgs e)
         {
+            ResultEditor.Text = "";
+
             if (string.IsNullOrEmpty(StartCoords.Text) || string.IsNullOrEmpty(EndCoords.Text))
             {
-                await DisplayAlert("Error", "Please enter both start and end coordinates.", "OK");
+                await DisplayAlert("Error", "Please enter both start and end street addresses.", "OK");
                 return;
             }
 
-            string[] startCoords = StartCoords.Text.Split(',');
-            string[] endCoords = EndCoords.Text.Split(',');
+            // Fetch coordinates for the start street address.
+            JObject startLocation = await GeocodingHelper.GetLocation(StartCoords.Text);
+            if (startLocation["data"] == null || !startLocation["data"].HasValues)
+            {
+                await DisplayAlert("Error", "Could not retrieve location data for the start address.", "OK");
+                return;
+            }
+            double startLat = startLocation["data"][0]["latitude"].Value<double>();
+            double startLon = startLocation["data"][0]["longitude"].Value<double>();
 
-            JObject route = await DigitransitHelper.GetRoute(
-                double.Parse(startCoords[0].Trim()),
-                double.Parse(startCoords[1].Trim()),
-                double.Parse(endCoords[0].Trim()),
-                double.Parse(endCoords[1].Trim())
-            );
+            // Fetch coordinates for the end street address.
+            JObject endLocation = await GeocodingHelper.GetLocation(EndCoords.Text);
+            if (endLocation["data"] == null || !endLocation["data"].HasValues)
+            {
+                await DisplayAlert("Error", "Could not retrieve location data for the end address.", "OK");
+                return;
+            }
+
+            double endLat = endLocation["data"][0]["latitude"].Value<double>();
+            double endLon = endLocation["data"][0]["longitude"].Value<double>();
+
+            JObject route = await DigitransitHelper.GetRoute(startLat, startLon, endLat, endLon);
 
             // For demonstration purposes, display the raw JSON.
-            RouteLabel.Text = route.ToString();
+            ResultEditor.Text = route.ToString();
+        }
+
+        private async void OnGetLocationClicked(object sender, EventArgs e)
+        {
+            ResultEditor.Text = "";
+
+            if (string.IsNullOrEmpty(StreetAddressInput.Text))
+            {
+                await DisplayAlert("Error", "Please enter the street address.", "OK");
+                return;
+            }
+
+            JObject location = await GeocodingHelper.GetLocation(StreetAddressInput.Text);
+
+            // For demonstration purposes, display the raw JSON.
+            ResultEditor.Text = location.ToString();
+        }
+
+        private async void OnGetWeatherClicked(object sender, EventArgs e)
+        {
+            ResultEditor.Text = "";
+
+            if (string.IsNullOrEmpty(StreetAddressInput.Text))
+            {
+                await DisplayAlert("Error", "Please enter the street address.", "OK");
+                return;
+            }
+
+            JObject location = await GeocodingHelper.GetLocation(StreetAddressInput.Text);
+            if (location["data"] != null && location["data"].HasValues)
+            {
+                double lat = location["data"][0]["latitude"].Value<double>();
+                double lon = location["data"][0]["longitude"].Value<double>();
+
+                JObject weather = await WeatherHelper.GetWeather(lat, lon);
+
+                // For demonstration purposes, display the raw JSON.
+                ResultEditor.Text = weather.ToString();
+            }
+            else
+            {
+                await DisplayAlert("Error", "Could not retrieve location data.", "OK");
+            }
         }
 
         protected override void OnAppearing()
