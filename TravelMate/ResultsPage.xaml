@@ -5,6 +5,17 @@
              BackgroundColor="{StaticResource DefaultBackgroundColor}">
 
     <VerticalStackLayout>
+        <Label Text="Debug input fields for weather. Values from 0-100. Temp, Rain, Clouds, Wind"
+               HorizontalOptions="Center"
+               Margin="10" />
+
+        <HorizontalStackLayout Margin="0, 20">
+            <Entry x:Name="tempEntry" WidthRequest="60" Placeholder="Temp" Keyboard="Numeric" TextChanged="OnEntryTextChanged"/>
+            <Entry x:Name="rainEntry" WidthRequest="60" Placeholder="Rain" Keyboard="Numeric" TextChanged="OnEntryTextChanged"/>
+            <Entry x:Name="cloudsEntry" WidthRequest="60" Placeholder="Clouds" Keyboard="Numeric" TextChanged="OnEntryTextChanged"/>
+            <Entry x:Name="windEntry" WidthRequest="60" Placeholder="Wind" Keyboard="Numeric" TextChanged="OnEntryTextChanged"/>
+        </HorizontalStackLayout>
+
         <Entry x:Name="StartCoords" Placeholder="Start address" />
         <Entry x:Name="EndCoords" Placeholder="End address" />
         <Button Text="Temporary debug Button to get route data" Clicked="OnGetRouteClicked" />
