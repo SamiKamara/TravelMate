@@ -34,7 +34,7 @@
                      FontAttributes="Bold"
                      CharacterSpacing="-1.2"
                      TextColor="#01bae8"
-                     FontSize="40"
+                     FontSize="64"
                      Margin="0,0,0,0"/>
                 <Label Grid.Row="1" 
                    Text="Where Do You Want To Travel?" 
@@ -42,7 +42,7 @@
                    HorizontalOptions="Start"
                    FontAttributes="Bold"
                    CharacterSpacing="-1.2"
-                   FontSize="40"
+                   FontSize="64"
                    Margin="0,0,0,20"/>
 
                 <Frame Grid.Row="2"
