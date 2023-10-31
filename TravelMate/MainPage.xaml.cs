@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Controls;
+using TravelMate.Services;
 
 namespace TravelMate
 {
@@ -7,6 +8,12 @@ namespace TravelMate
         public MainPage()
         {
             InitializeComponent();
+
+            // Create an instance of the UserSettingsService
+            var userSettingsService = new UserSettingsService();
+
+            // Set the binding context to the UserSettingsService instance
+            this.BindingContext = userSettingsService;
         }
 
         private void OnNextClicked(object sender, EventArgs e)
