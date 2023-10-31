@@ -10,7 +10,12 @@ namespace TravelMate.Services
     {
         private string from;
         private string to;
+        private int temperature;
+        private double rainChance;
+        private int cloudiness;
+        private int windSpeed;
 
+        
         public string From
         {
             get { return from; }
@@ -33,6 +38,58 @@ namespace TravelMate.Services
                 {
                     LogUserSettingsChange("To", to, value);
                     to = value;
+                }
+            }
+        }
+
+        public int Temperature
+        {
+            get { return temperature; }
+            set
+            {
+                if (temperature != value)
+                {
+                    LogUserSettingsChange("Temperature", temperature.ToString(), value.ToString());
+                    temperature = value;
+                }
+            }
+        }
+
+        public double RainChance
+        {
+            get { return rainChance; }
+            set
+            {
+                if (rainChance != value)
+                {
+                    LogUserSettingsChange("RainChance", rainChance.ToString(), value.ToString());
+                    rainChance = value;
+                }
+            }
+        }
+
+        public int Cloudiness
+        {
+            get { return cloudiness; }
+            set
+            {
+                if (cloudiness != value)
+                {
+                    LogUserSettingsChange("Cloudiness", cloudiness.ToString(), value.ToString());
+                    cloudiness = value;
+                }
+            }
+        }
+
+        public int WindSpeed
+        {
+            get { return windSpeed; }
+            set
+            {
+                if (windSpeed != value)
+                {
+                    LogUserSettingsChange("WindSpeed", windSpeed.ToString(), value.ToString());
+                    windSpeed = value;
                 }
             }
         }
