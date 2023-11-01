@@ -1,70 +1,272 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TravelMate.WeatherPage"
-             Title="WeatherPage"
-             BackgroundColor="{StaticResource DefaultBackgroundColor}">
+<ContentPage
+    x:Class="TravelMate.WeatherPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="WeatherPage"
+    BackgroundColor="{StaticResource DefaultBackgroundColor}">
 
-    <StackLayout Spacing="20" Padding="20">
+    <Grid Padding="20">
 
-        <!-- Temperature Slider -->
-        <StackLayout Orientation="Horizontal" 
-                     Spacing="10" 
-                     HorizontalOptions="FillAndExpand">
-            <Label Text="Temperature" 
-                   VerticalOptions="Center"/>
-            <Slider x:Name="TemperatureSlider" 
-                    Maximum="100" 
-                    Minimum="0" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="75*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35*" />
+            <ColumnDefinition Width="40*" />
+            <ColumnDefinition Width="25*" />
+        </Grid.ColumnDefinitions>
 
-        <!-- Chance of Rain Slider -->
-        <StackLayout Orientation="Horizontal" 
-                     Spacing="10" 
-                     HorizontalOptions="FillAndExpand">
-            <Label Text="Chance of Rain" 
-                   VerticalOptions="Center"/>
-            <Slider x:Name="RainSlider" 
-                    Maximum="100" 
-                    Minimum="0" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
 
-        <!-- Cloudiness Slider -->
-        <StackLayout Orientation="Horizontal" 
-                     Spacing="10" 
-                     HorizontalOptions="FillAndExpand">
-            <Label Text="Cloudiness" 
-                   VerticalOptions="Center"/>
-            <Slider x:Name="CloudinessSlider" 
-                    Maximum="100" 
-                    Minimum="0" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
 
-        <!-- Wind Speed Slider -->
-        <StackLayout Orientation="Horizontal" 
-                     Spacing="10" 
-                     HorizontalOptions="FillAndExpand">
-            <Label Text="Wind Speed" 
-                   VerticalOptions="Center"/>
-            <Slider x:Name="WindSpeedSlider" 
-                    Maximum="100" 
-                    Minimum="0" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
 
-        <Button Text="View Results >" 
-                HorizontalOptions="Center"
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="-12,10,0,0"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                Clicked="OnBackButtonClicked"
+                HeightRequest="40"
+                HorizontalOptions="Start"
+                ImageSource="backbutton.png" />
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                CharacterSpacing="-0.6"
+                FontAttributes="Bold"
+                FontSize="32"
+                Text="Your Route &amp; Your Travel Settings"
+                TextColor="#01BAE8" />
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                CharacterSpacing="-0.6"
+                FontAttributes="Bold"
+                FontSize="24"
+                Text="Choose the desired weather conditions on arrival" />
+
+        </Grid>
+
+        <Image
+            Grid.Row="0"
+            Grid.Column="2"
+            Aspect="AspectFit"
+            HorizontalOptions="End"
+            Source="weatherpageicon.png" />
+
+        <Frame
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            BackgroundColor="#2A2D3E"
+            BorderColor="Transparent">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Clicked="OnViewResultsClicked"
+                    HorizontalOptions="End"
+                    Text="View Results &gt;"
+                    VerticalOptions="End" />
+
+            </Grid>
+
+        </Frame>
+
+
+
+        <Grid
+            Grid.Row="2"
+            Grid.Column="0"
+            Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Column="0" VerticalOptions="Start">
+
+                    <Label
+                        FontAttributes="Bold"
+                        Text="From"
+                        TextColor="#01BAE8" />
+                    <Label Text="{Binding From}" />
+
+                </StackLayout>
+
+                <StackLayout Grid.Column="0" VerticalOptions="End">
+
+                    <Label
+                        FontAttributes="Bold"
+                        Text="To"
+                        TextColor="#01BAE8" />
+                    <Label Text="{Binding To}" />
+
+                </StackLayout>
+
+                <Image
+                    Margin="30,0,0,0"
+                    Grid.Column="1"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Start"
+                    Source="routeicon.png" />
+
+                <StackLayout
+                    Margin="20,0,0,0"
+                    Grid.Column="2"
+                    HorizontalOptions="Center"
+                    Spacing="32"
+                    VerticalOptions="Center">
+
+                    <StackLayout Orientation="Horizontal" Spacing="30">
+
+                        <Image
+                            HeightRequest="30"
+                            Source="temperatureicon.png"
+                            VerticalOptions="Center"
+                            WidthRequest="30" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            Text="Temperature"
+                            TextColor="#01BAE8"
+                            VerticalOptions="Center" />
+
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="30">
+
+                        <Image
+                            HeightRequest="30"
+                            Source="rainicon.png"
+                            VerticalOptions="Center"
+                            WidthRequest="30" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            Text="Chance Of Rain"
+                            TextColor="#01BAE8"
+                            VerticalOptions="Center" />
+
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="30">
+
+                        <Image
+                            HeightRequest="30"
+                            Source="cloudicon.png"
+                            VerticalOptions="Center"
+                            WidthRequest="30" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="Cloudiness"
+                            TextColor="#01BAE8"
+                            VerticalOptions="Center" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Spacing="30">
+
+                        <Image
+                            HeightRequest="30"
+                            Source="windicon.png"
+                            VerticalOptions="Center"
+                            WidthRequest="30" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            Text="Wind Speed"
+                            TextColor="#01BAE8"
+                            VerticalOptions="Center" />
+
+                    </StackLayout>
+
+                </StackLayout>
+
+            </Grid>
+
+        </Grid>
+
+        <StackLayout
+            Grid.Row="2"
+            Grid.Column="1"
+            Spacing="30"
+            VerticalOptions="Center">
+
+            <Slider
+                x:Name="TemperatureSlider"
+                HorizontalOptions="FillAndExpand"
+                Maximum="32"
+                Minimum="-32"
                 VerticalOptions="Center"
-                Margin="0,20,0,0" 
-                Clicked="OnViewResultsClicked" />
+                Value="{Binding Temperature}" />
 
-    </StackLayout>
+            <Slider
+                x:Name="RainSlider"
+                HorizontalOptions="FillAndExpand"
+                Maximum="100"
+                Minimum="0"
+                Value="{Binding RainChance}" />
+
+            <Slider
+                x:Name="CloudinessSlider"
+                HorizontalOptions="FillAndExpand"
+                Maximum="100"
+                Minimum="0"
+                VerticalOptions="Center"
+                Value="{Binding Cloudiness}" />
+
+            <Slider
+                x:Name="WindSpeedSlider"
+                HorizontalOptions="FillAndExpand"
+                Maximum="10.0"
+                Minimum="0"
+                VerticalOptions="Center"
+                Value="{Binding WindSpeed}" />
+        </StackLayout>
+
+    </Grid>
 
 </ContentPage>

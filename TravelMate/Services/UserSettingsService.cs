@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace TravelMate.Services
 {
-    class UserSettingsService
+    public class UserSettingsService
     {
         private string from;
         private string to;
+        private int temperature;
+        private int rainChance;
+        private int cloudiness;
+        private double windSpeed;
 
+        
         public string From
         {
             get { return from; }
@@ -33,6 +38,58 @@ namespace TravelMate.Services
                 {
                     LogUserSettingsChange("To", to, value);
                     to = value;
+                }
+            }
+        }
+
+        public int Temperature
+        {
+            get { return temperature; }
+            set
+            {
+                if (temperature != value)
+                {
+                    LogUserSettingsChange("Temperature", temperature.ToString(), value.ToString());
+                    temperature = value;
+                }
+            }
+        }
+
+        public int RainChance
+        {
+            get { return rainChance; }
+            set
+            {
+                if (rainChance != value)
+                {
+                    LogUserSettingsChange("RainChance", rainChance.ToString(), value.ToString());
+                    rainChance = value;
+                }
+            }
+        }
+
+        public int Cloudiness
+        {
+            get { return cloudiness; }
+            set
+            {
+                if (cloudiness != value)
+                {
+                    LogUserSettingsChange("Cloudiness", cloudiness.ToString(), value.ToString());
+                    cloudiness = value;
+                }
+            }
+        }
+
+        public double WindSpeed
+        {
+            get { return windSpeed; }
+            set
+            {
+                if (windSpeed != value)
+                {
+                    LogUserSettingsChange("WindSpeed", windSpeed.ToString(), value.ToString());
+                    windSpeed = value;
                 }
             }
         }
