@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace TravelMate.Services
 {
-    class UserSettingsService
+    public class UserSettingsService
     {
         private string from;
         private string to;
         private int temperature;
-        private double rainChance;
+        private int rainChance;
         private int cloudiness;
-        private int windSpeed;
+        private double windSpeed;
 
         
         public string From
@@ -55,7 +55,7 @@ namespace TravelMate.Services
             }
         }
 
-        public double RainChance
+        public int RainChance
         {
             get { return rainChance; }
             set
@@ -81,7 +81,7 @@ namespace TravelMate.Services
             }
         }
 
-        public int WindSpeed
+        public double WindSpeed
         {
             get { return windSpeed; }
             set
