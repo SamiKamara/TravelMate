@@ -1,16 +1,23 @@
 using Microsoft.Maui.Controls;
+using TravelMate.Services;
 
 namespace TravelMate
-{
+{   
     public partial class WeatherPage : ContentPage
     {
-        public WeatherPage()
+        private UserSettingsService userSettingsService;
+        public WeatherPage(UserSettingsService routeSettings)
         {
             InitializeComponent();
+
+            userSettingsService = routeSettings;
+
+            this.BindingContext = userSettingsService;
+            
         }
 
         private void OnViewResultsClicked(object sender, EventArgs e)
-        {
+        { 
             Navigation.PushAsync(new ResultsPage());
         }
 
@@ -25,5 +32,6 @@ namespace TravelMate
         {
             Navigation.PopAsync();
         }
+
     }
 }
