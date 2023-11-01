@@ -5,12 +5,13 @@ namespace TravelMate
 {
     public partial class MainPage
     {
+        private UserSettingsService userSettingsService;
         public MainPage()
         {
             InitializeComponent();
 
             // Create an instance of the UserSettingsService
-            var userSettingsService = new UserSettingsService();
+            userSettingsService = new UserSettingsService();
 
             // Set the binding context to the UserSettingsService instance
             this.BindingContext = userSettingsService;
@@ -18,7 +19,8 @@ namespace TravelMate
 
         private void OnNextClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new WeatherPage());
+            
+            Navigation.PushAsync(new WeatherPage(userSettingsService));
         }
 
         protected override void OnAppearing()
