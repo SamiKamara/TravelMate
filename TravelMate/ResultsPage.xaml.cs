@@ -50,6 +50,12 @@ namespace TravelMate
 
             JObject route = await DigitransitHelper.GetRoute(startLat, startLon, endLat, endLon);
 
+            string[] weatherValues = endWeatherData.Split(',');
+            string[] inputValues = inputWeatherData.Split(',');
+
+            DesiredWeather.Text = $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}";
+            DestinationWeather.Text = $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}";
+
             ResultEditor.Text = $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n" + route.ToString();
         }
 
