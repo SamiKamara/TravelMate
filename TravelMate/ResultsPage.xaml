@@ -26,6 +26,9 @@
         <Button Text="Get Location Data" Clicked="OnGetLocationClicked" />
         <Button Text="Get Weather Data" Clicked="OnGetWeatherClicked" />
 
+        <Label  x:Name="DesiredWeather" />
+        <Label x:Name="DestinationWeather" />
+
         <ScrollView HeightRequest="1000">
             <Editor x:Name="ResultEditor" TextColor="White" IsReadOnly="True" />
         </ScrollView>
