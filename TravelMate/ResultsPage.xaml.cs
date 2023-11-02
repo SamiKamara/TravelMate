@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json.Linq;
 using TravelMate.Services;
+using System.Text;
 
 namespace TravelMate
 {
@@ -10,19 +11,12 @@ namespace TravelMate
         public ResultsPage(UserSettingsService routeSettings)
         {
             InitializeComponent();
-
             routeData = routeSettings;
         }
 
-        private async void OnGetRouteClicked(object sender, EventArgs e)
+        private async Task OnResultsPageLoaded()
         {
             ResultEditor.Text = "";
-
-            //if (string.IsNullOrEmpty(routeData.From) || string.IsNullOrEmpty(routeData.To))
-            //{
-            //    await DisplayAlert("Error", "Please enter both start and end street addresses.", "OK");
-            //    return;
-            //}
 
             JObject startLocation = await GeocodingHelper.GetLocation(routeData.From);
             if (startLocation["data"] == null || !startLocation["data"].HasValues)
@@ -53,10 +47,49 @@ namespace TravelMate
             string[] weatherValues = endWeatherData.Split(',');
             string[] inputValues = inputWeatherData.Split(',');
 
-            DesiredWeather.Text = $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}";
-            DestinationWeather.Text = $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}";
+            DesiredWeather.Text = $"   Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}";
+            DestinationWeather.Text = $"   Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}";
 
-            ResultEditor.Text = $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n" + route.ToString();
+            ResultEditor.Text = $"Match percentage between desired weather and end locations weather: {matchPercentage}%\n\n" 
+                + GetCompactPublicTransportRoute(route.ToString()) 
+                + "\n\n"
+                + route.ToString();
+        }
+
+        public static string GetCompactPublicTransportRoute(string json)
+        {
+            var sb = new StringBuilder();
+            var jObject = JObject.Parse(json);
+
+            foreach (var itinerary in jObject["data"]["plan"]["itineraries"])
+            {
+                foreach (var leg in itinerary["legs"])
+                {
+                    if (leg.Value<bool>("transitLeg"))
+                    {
+                        var startTime = DateTimeOffset.FromUnixTimeMilliseconds(leg.Value<long>("startTime")).ToLocalTime();
+                        var duration = TimeSpan.FromSeconds(leg.Value<double>("duration"));
+
+                        sb.AppendFormat("Mode: {0}, Start: {1:HH:mm}, Duration: {2:hh\\:mm}\n",
+                                        leg["mode"],
+                                        startTime,
+                                        duration);
+                    }
+                }
+            }
+
+            return sb.ToString().Trim();
+        }
+
+        private void HideAllExceptResultEditor()
+        {
+            tempEntry.IsVisible = false;
+            rainEntry.IsVisible = false;
+            cloudsEntry.IsVisible = false;
+            windEntry.IsVisible = false;
+            StartCoords.IsVisible = false;
+            EndCoords.IsVisible = false;
+            StreetAddressInput.IsVisible = false;
         }
 
         private async void OnGetLocationClicked(object sender, EventArgs e)
@@ -107,6 +140,20 @@ namespace TravelMate
         {
             base.OnAppearing();
             NavigationPage.SetHasNavigationBar(this, false);
+            HideAllExceptResultEditor();
+            _ = OnResultsPageLoadedAsync();
+        }
+
+        private async Task OnResultsPageLoadedAsync()
+        {
+            try
+            {
+                await OnResultsPageLoaded();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
         }
 
         public static string ExtractWeatherData(string jsonInput)
