@@ -18,7 +18,7 @@ namespace TravelMate
 
         private void OnViewResultsClicked(object sender, EventArgs e)
         { 
-            Navigation.PushAsync(new ResultsPage());
+            Navigation.PushAsync(new ResultsPage(userSettingsService));
         }
 
         protected override void OnAppearing()

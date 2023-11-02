@@ -1,26 +1,30 @@
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json.Linq;
+using TravelMate.Services;
 
 namespace TravelMate
 {
     public partial class ResultsPage : ContentPage
     {
-        public ResultsPage()
+        private UserSettingsService routeData;
+        public ResultsPage(UserSettingsService routeSettings)
         {
             InitializeComponent();
+
+            routeData = routeSettings;
         }
 
         private async void OnGetRouteClicked(object sender, EventArgs e)
         {
             ResultEditor.Text = "";
 
-            if (string.IsNullOrEmpty(StartCoords.Text) || string.IsNullOrEmpty(EndCoords.Text))
-            {
-                await DisplayAlert("Error", "Please enter both start and end street addresses.", "OK");
-                return;
-            }
+            //if (string.IsNullOrEmpty(routeData.From) || string.IsNullOrEmpty(routeData.To))
+            //{
+            //    await DisplayAlert("Error", "Please enter both start and end street addresses.", "OK");
+            //    return;
+            //}
 
-            JObject startLocation = await GeocodingHelper.GetLocation(StartCoords.Text);
+            JObject startLocation = await GeocodingHelper.GetLocation(routeData.From);
             if (startLocation["data"] == null || !startLocation["data"].HasValues)
             {
                 await DisplayAlert("Error", "Could not retrieve location data for the start address.", "OK");
@@ -29,7 +33,7 @@ namespace TravelMate
             double startLat = startLocation["data"][0]["latitude"].Value<double>();
             double startLon = startLocation["data"][0]["longitude"].Value<double>();
 
-            JObject endLocation = await GeocodingHelper.GetLocation(EndCoords.Text);
+            JObject endLocation = await GeocodingHelper.GetLocation(routeData.To);
             if (endLocation["data"] == null || !endLocation["data"].HasValues)
             {
                 await DisplayAlert("Error", "Could not retrieve location data for the end address.", "OK");
@@ -134,12 +138,13 @@ namespace TravelMate
         // For debugging, these will later come from sliders on weatherpage
         public string ExtractInputFieldsData()
         {
-            double tempValue = double.TryParse(tempEntry.Text, out var tempResult) ? tempResult : 0;
-            double rainValue = double.TryParse(rainEntry.Text, out var rainResult) ? rainResult : 0;
-            double cloudsValue = double.TryParse(cloudsEntry.Text, out var cloudsResult) ? cloudsResult : 0;
-            double windValue = double.TryParse(windEntry.Text, out var windResult) ? windResult : 0;
+            double tempValue = double.TryParse(routeData.Temperature.ToString(), out var tempResult) ? tempResult : 0;
+            double rainValue = double.TryParse(routeData.RainChance.ToString(), out var rainResult) ? rainResult : 0;
+            double cloudsValue = double.TryParse(routeData.Cloudiness.ToString(), out var cloudsResult) ? cloudsResult : 0;
+            double windValue = double.TryParse(routeData.WindSpeed.ToString(), out var windResult) ? windResult : 0;
 
-            string tempStr = FormatToThreeDigits(tempValue);
+            // same temperature offset as for destination weather
+            string tempStr = FormatToThreeDigits(tempValue + 50);
             string rainStr = FormatToThreeDigits(rainValue);
             string cloudsStr = FormatToThreeDigits(cloudsValue);
             string windStr = FormatToThreeDigits(windValue);
