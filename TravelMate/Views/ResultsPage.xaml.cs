@@ -72,15 +72,9 @@ namespace TravelMate
             }
         }
 
-        // These will be removed entirely once not needed for debugging
+        // This will be removed entirely once not needed for debugging
         private void HideAllExceptResultEditor()
         {
-            tempEntry.IsVisible = false;
-            rainEntry.IsVisible = false;
-            cloudsEntry.IsVisible = false;
-            windEntry.IsVisible = false;
-            StartCoords.IsVisible = false;
-            EndCoords.IsVisible = false;
             StreetAddressInput.IsVisible = false;
         }
     }
