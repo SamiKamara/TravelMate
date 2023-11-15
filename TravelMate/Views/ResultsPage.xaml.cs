@@ -23,21 +23,10 @@ namespace TravelMate
             await viewModel.GetRouteAsync(ResultEditor, DesiredWeather, DestinationWeather);
         }
 
-        protected async void OnGetLocationClicked(object sender, EventArgs e)
-        {
-            await viewModel.GetLocationAsync(ResultEditor, StreetAddressInput.Text);
-        }
-
-        protected async void OnGetWeatherClicked(object sender, EventArgs e)
-        {
-            await viewModel.GetWeatherAsync(ResultEditor, StreetAddressInput.Text);
-        }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
             NavigationPage.SetHasNavigationBar(this, false);
-            HideAllExceptResultEditor();
             _ = OnResultsPageLoadedAsync();
         }
 
@@ -70,12 +59,6 @@ namespace TravelMate
             {
                 ((Entry)sender).Text = e.OldTextValue;
             }
-        }
-
-        // This will be removed entirely once not needed for debugging
-        private void HideAllExceptResultEditor()
-        {
-            StreetAddressInput.IsVisible = false;
         }
     }
 }
