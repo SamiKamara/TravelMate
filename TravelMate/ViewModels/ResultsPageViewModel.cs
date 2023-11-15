@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using TravelMate.Services;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
+using System.Text;
 
 namespace TravelMate.ViewModels
 {
@@ -51,15 +52,38 @@ namespace TravelMate.ViewModels
             string[] weatherValues = endWeatherData.Split(',');
             string[] inputValues = inputWeatherData.Split(',');
 
-            //desiredWeather.Text = $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}";
-            //destinationWeather.Text = $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}";
-            //resultEditor.Text = $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n" + route.ToString();
-
             resultEditor.Text = 
                     $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}\n\n" +
                     $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}\n\n" +
-                    $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n" +
-                    route.ToString();
+                    $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n"
+                    + GetCompactPublicTransportRoute(route.ToString())
+                    + "\n\n"
+                    + route.ToString();
+        }
+
+        public static string GetCompactPublicTransportRoute(string json)
+        {
+            var sb = new StringBuilder();
+            var jObject = JObject.Parse(json);
+
+            foreach (var itinerary in jObject["data"]["plan"]["itineraries"])
+            {
+                foreach (var leg in itinerary["legs"])
+                {
+                    if (leg.Value<bool>("transitLeg"))
+                    {
+                        var startTime = DateTimeOffset.FromUnixTimeMilliseconds(leg.Value<long>("startTime")).ToLocalTime();
+                        var duration = TimeSpan.FromSeconds(leg.Value<double>("duration"));
+
+                        sb.AppendFormat("Mode: {0}, Start: {1:HH:mm}, Duration: {2:hh\\:mm}\n",
+                                        leg["mode"],
+                                        startTime,
+                                        duration);
+                    }
+                }
+            }
+
+            return sb.ToString().Trim();
         }
 
         private Task DisplayAlert(string v1, string v2, string v3)
