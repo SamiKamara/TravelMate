@@ -5,8 +5,6 @@
              BackgroundColor="{StaticResource DefaultBackgroundColor}">
 
     <VerticalStackLayout>
-        <Label  x:Name="DesiredWeather" />
-        <Label  x:Name="DestinationWeather" />
         <ScrollView HeightRequest="1000">
             <Editor x:Name="ResultEditor" TextColor="White" IsReadOnly="True" />
         </ScrollView>

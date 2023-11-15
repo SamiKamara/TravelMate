@@ -18,11 +18,6 @@ namespace TravelMate
             BindingContext = viewModel;
         }
 
-        protected async void OnGetRouteClicked(object sender, EventArgs e)
-        {
-            await viewModel.GetRouteAsync(ResultEditor, DesiredWeather, DestinationWeather);
-        }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -44,7 +39,7 @@ namespace TravelMate
 
         private async Task OnResultsPageLoaded()
         {
-            await viewModel.GetRouteAsync(ResultEditor, DesiredWeather, DestinationWeather);
+            await viewModel.GetRouteAsync(ResultEditor);
         }
 
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)

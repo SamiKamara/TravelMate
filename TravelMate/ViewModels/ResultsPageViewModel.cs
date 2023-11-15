@@ -16,7 +16,7 @@ namespace TravelMate.ViewModels
             routeData = routeSettings;
         }
 
-        public async Task GetRouteAsync(Editor resultEditor, Label desiredWeather, Label destinationWeather)
+        public async Task GetRouteAsync(Editor resultEditor)
         {
             resultEditor.Text = "";
 
@@ -51,10 +51,15 @@ namespace TravelMate.ViewModels
             string[] weatherValues = endWeatherData.Split(',');
             string[] inputValues = inputWeatherData.Split(',');
 
-            desiredWeather.Text = $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}";
-            destinationWeather.Text = $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}";
+            //desiredWeather.Text = $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}";
+            //destinationWeather.Text = $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}";
+            //resultEditor.Text = $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n" + route.ToString();
 
-            resultEditor.Text = $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n" + route.ToString();
+            resultEditor.Text = 
+                    $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}\n\n" +
+                    $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}\n\n" +
+                    $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n" +
+                    route.ToString();
         }
 
         private Task DisplayAlert(string v1, string v2, string v3)
