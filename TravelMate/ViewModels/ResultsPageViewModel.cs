@@ -100,10 +100,9 @@ namespace TravelMate.ViewModels
                     string routeWeatherData = ExtractWeatherData(forecastData.ToString());
 
                     double routeMatchPercentage = CalculateMatchPercentage(routeWeatherData, inputWeatherData);
-                    routeMatchPercentage = Math.Round(routeMatchPercentage, 1); // Round to 1 decimal place
+                    routeMatchPercentage = Math.Round(routeMatchPercentage, 1);
                     sb.AppendLine($"Weather match percentage on arrival: {routeMatchPercentage}%");
 
-                    // Check if this is the highest match percentage
                     if (routeMatchPercentage > highestMatchPercentage)
                     {
                         highestMatchPercentage = routeMatchPercentage;
@@ -114,7 +113,6 @@ namespace TravelMate.ViewModels
                 routeNumber++;
             }
 
-            // Append information about the route with the highest match percentage
             if (highestMatchRouteNumber > 0)
             {
                 sb.AppendLine($"\nRoute with highest weather match percentage: Route {highestMatchRouteNumber} ({highestMatchPercentage}%)");
