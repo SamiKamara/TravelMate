@@ -47,17 +47,21 @@ namespace TravelMate.ViewModels
             JObject route = await DigitransitHelper.GetRoute(startLat, startLon, endLat, endLon);
             string[] weatherValues = endWeatherData.Split(',');
             string[] inputValues = inputWeatherData.Split(',');
+            string routeInfo = await GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon);
 
             resultEditor.Text = 
                     $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}\n" +
                     $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}\n" +
                     $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n"
-                    + GetCompactPublicTransportRoute(route.ToString())
+                    + routeInfo
                     + "\n\n"
                     + route.ToString();
         }
 
-        public static string GetCompactPublicTransportRoute(string json)
+        // This function demonstrates how to get the wanted data for routes
+        // any non text form of output should draw inspiration from this
+        // and make its own functions for similar purposes
+        public static async Task<string> GetCompactPublicTransportRoute(string json, string inputWeatherData, double endLat, double endLon)
         {
             var sb = new StringBuilder();
             var jObject = JObject.Parse(json);
@@ -65,18 +69,34 @@ namespace TravelMate.ViewModels
             foreach (var itinerary in jObject["data"]["plan"]["itineraries"])
             {
                 sb.AppendLine("Route:");
+                string arrivalTime = "";
+
                 foreach (var leg in itinerary["legs"])
                 {
                     if (leg.Value<bool>("transitLeg"))
                     {
                         var startTime = DateTimeOffset.FromUnixTimeMilliseconds(leg.Value<long>("startTime")).ToLocalTime();
+                        var endTime = DateTimeOffset.FromUnixTimeMilliseconds(leg.Value<long>("endTime")).ToLocalTime();
                         var duration = TimeSpan.FromSeconds(leg.Value<double>("duration"));
 
                         sb.AppendFormat("Mode: {0}, Start: {1:HH:mm}, Duration: {2:hh\\:mm}\n",
                                         leg["mode"],
                                         startTime,
                                         duration);
+
+                        arrivalTime = endTime.ToString("HH:mm");
                     }
+                }
+
+                if (!string.IsNullOrEmpty(arrivalTime))
+                {
+                    sb.AppendLine($"Arrival Time: {arrivalTime}");
+
+                    JObject forecastData = await WeatherHelper.GetWeatherForGivenTime(endLat, endLon, arrivalTime);
+                    string routeWeatherData = ExtractWeatherData(forecastData.ToString());
+
+                    double routeMatchPercentage = CalculateMatchPercentage(routeWeatherData, inputWeatherData);
+                    sb.AppendLine($"Weather Match Percentage: {routeMatchPercentage}%");
                 }
             }
 
