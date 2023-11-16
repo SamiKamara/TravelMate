@@ -40,21 +40,17 @@ namespace TravelMate.ViewModels
 
             double endLat = endLocation["data"][0]["latitude"].Value<double>();
             double endLon = endLocation["data"][0]["longitude"].Value<double>();
-
             JObject endWeather = await WeatherHelper.GetWeather(endLat, endLon);
             string endWeatherData = ExtractWeatherData(endWeather.ToString());
             string inputWeatherData = ExtractInputFieldsData();
-
             double matchPercentage = CalculateMatchPercentage(endWeatherData, inputWeatherData);
-
             JObject route = await DigitransitHelper.GetRoute(startLat, startLon, endLat, endLon);
-
             string[] weatherValues = endWeatherData.Split(',');
             string[] inputValues = inputWeatherData.Split(',');
 
             resultEditor.Text = 
-                    $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}\n\n" +
-                    $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}\n\n" +
+                    $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}\n" +
+                    $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}\n" +
                     $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n"
                     + GetCompactPublicTransportRoute(route.ToString())
                     + "\n\n"
@@ -68,6 +64,7 @@ namespace TravelMate.ViewModels
 
             foreach (var itinerary in jObject["data"]["plan"]["itineraries"])
             {
+                sb.AppendLine("Route:");
                 foreach (var leg in itinerary["legs"])
                 {
                     if (leg.Value<bool>("transitLeg"))
