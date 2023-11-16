@@ -66,9 +66,13 @@ namespace TravelMate.ViewModels
             var sb = new StringBuilder();
             var jObject = JObject.Parse(json);
 
+            int routeNumber = 1;
+            double highestMatchPercentage = 0;
+            int highestMatchRouteNumber = 0;
+
             foreach (var itinerary in jObject["data"]["plan"]["itineraries"])
             {
-                sb.AppendLine("Route:");
+                sb.AppendLine($"\nRoute {routeNumber}:");
                 string arrivalTime = "";
 
                 foreach (var leg in itinerary["legs"])
@@ -96,8 +100,24 @@ namespace TravelMate.ViewModels
                     string routeWeatherData = ExtractWeatherData(forecastData.ToString());
 
                     double routeMatchPercentage = CalculateMatchPercentage(routeWeatherData, inputWeatherData);
-                    sb.AppendLine($"Weather Match Percentage: {routeMatchPercentage}%");
+                    routeMatchPercentage = Math.Round(routeMatchPercentage, 1); // Round to 1 decimal place
+                    sb.AppendLine($"Weather match percentage on arrival: {routeMatchPercentage}%");
+
+                    // Check if this is the highest match percentage
+                    if (routeMatchPercentage > highestMatchPercentage)
+                    {
+                        highestMatchPercentage = routeMatchPercentage;
+                        highestMatchRouteNumber = routeNumber;
+                    }
                 }
+
+                routeNumber++;
+            }
+
+            // Append information about the route with the highest match percentage
+            if (highestMatchRouteNumber > 0)
+            {
+                sb.AppendLine($"\nRoute with highest weather match percentage: Route {highestMatchRouteNumber} ({highestMatchPercentage}%)");
             }
 
             return sb.ToString().Trim();
