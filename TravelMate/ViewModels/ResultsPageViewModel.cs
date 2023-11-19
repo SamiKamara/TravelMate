@@ -40,47 +40,82 @@ namespace TravelMate.ViewModels
 
             double endLat = endLocation["data"][0]["latitude"].Value<double>();
             double endLon = endLocation["data"][0]["longitude"].Value<double>();
-
             JObject endWeather = await WeatherHelper.GetWeather(endLat, endLon);
             string endWeatherData = ExtractWeatherData(endWeather.ToString());
             string inputWeatherData = ExtractInputFieldsData();
-
             double matchPercentage = CalculateMatchPercentage(endWeatherData, inputWeatherData);
-
             JObject route = await DigitransitHelper.GetRoute(startLat, startLon, endLat, endLon);
-
             string[] weatherValues = endWeatherData.Split(',');
             string[] inputValues = inputWeatherData.Split(',');
+            string routeInfo = await GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon);
 
             resultEditor.Text = 
-                    $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}\n\n" +
-                    $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}\n\n" +
+                    $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}\n" +
+                    $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}\n" +
                     $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n"
-                    + GetCompactPublicTransportRoute(route.ToString())
+                    + routeInfo
                     + "\n\n"
                     + route.ToString();
         }
 
-        public static string GetCompactPublicTransportRoute(string json)
+        // This function demonstrates how to get the wanted data for routes
+        // any non text form of output should draw inspiration from this
+        // and make its own functions for similar purposes
+        public static async Task<string> GetCompactPublicTransportRoute(string json, string inputWeatherData, double endLat, double endLon)
         {
             var sb = new StringBuilder();
             var jObject = JObject.Parse(json);
 
+            int routeNumber = 1;
+            double highestMatchPercentage = 0;
+            int highestMatchRouteNumber = 0;
+
             foreach (var itinerary in jObject["data"]["plan"]["itineraries"])
             {
+                sb.AppendLine($"\nRoute {routeNumber}:");
+                string arrivalTime = "";
+
                 foreach (var leg in itinerary["legs"])
                 {
                     if (leg.Value<bool>("transitLeg"))
                     {
                         var startTime = DateTimeOffset.FromUnixTimeMilliseconds(leg.Value<long>("startTime")).ToLocalTime();
+                        var endTime = DateTimeOffset.FromUnixTimeMilliseconds(leg.Value<long>("endTime")).ToLocalTime();
                         var duration = TimeSpan.FromSeconds(leg.Value<double>("duration"));
 
                         sb.AppendFormat("Mode: {0}, Start: {1:HH:mm}, Duration: {2:hh\\:mm}\n",
                                         leg["mode"],
                                         startTime,
                                         duration);
+
+                        arrivalTime = endTime.ToString("HH:mm");
                     }
                 }
+
+                if (!string.IsNullOrEmpty(arrivalTime))
+                {
+                    sb.AppendLine($"Arrival Time: {arrivalTime}");
+
+                    JObject forecastData = await WeatherHelper.GetWeatherForGivenTime(endLat, endLon, arrivalTime);
+                    string routeWeatherData = ExtractWeatherData(forecastData.ToString());
+
+                    double routeMatchPercentage = CalculateMatchPercentage(routeWeatherData, inputWeatherData);
+                    routeMatchPercentage = Math.Round(routeMatchPercentage, 1);
+                    sb.AppendLine($"Weather match percentage on arrival: {routeMatchPercentage}%");
+
+                    if (routeMatchPercentage > highestMatchPercentage)
+                    {
+                        highestMatchPercentage = routeMatchPercentage;
+                        highestMatchRouteNumber = routeNumber;
+                    }
+                }
+
+                routeNumber++;
+            }
+
+            if (highestMatchRouteNumber > 0)
+            {
+                sb.AppendLine($"\nRoute with highest weather match percentage: Route {highestMatchRouteNumber} ({highestMatchPercentage}%)");
             }
 
             return sb.ToString().Trim();
