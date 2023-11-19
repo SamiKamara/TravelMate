@@ -21,5 +21,19 @@ namespace TravelMate
 
             return builder.Build();
         }
+
+        private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
+        {
+            _ = mauiAppBuilder.Services.AddTransient<MainPageViewModel>();
+
+            return mauiAppBuilder;
+        }
+
+        private static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
+        {
+            _ = mauiAppBuilder.Services.AddTransient<MainPage>();
+
+            return mauiAppBuilder;
+        }
     }
 }

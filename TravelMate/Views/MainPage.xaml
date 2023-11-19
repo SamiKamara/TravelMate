@@ -55,7 +55,7 @@
                            CharacterSpacing="0.6"
                            PlaceholderColor="White"
                            HorizontalOptions="FillAndExpand"
-                           Text="{Binding From}"
+                           Text="{Binding RouteData.From, Mode=TwoWay}"
                            VerticalOptions="Center" />
                 </Frame>
 
@@ -68,7 +68,7 @@
                            CharacterSpacing="0.6"
                            PlaceholderColor="White"
                            HorizontalOptions="FillAndExpand"
-                           Text="{Binding To}"
+                           Text="{Binding RouteData.To, Mode=TwoWay}"
                            VerticalOptions="Center" />
                 </Frame>
 
