@@ -3,10 +3,34 @@
              x:Class="TravelMate.DetailedPage"
              Title="DetailedPage"
              BackgroundColor="{StaticResource DefaultBackgroundColor}">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <ScrollView> 
+        <VerticalStackLayout>
+
+        <!-- Title Section -->
+        <StackLayout BackgroundColor="LightBlue" Padding="20">
+            <Label Text="Maui Page" FontSize="24" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Responsive Page Example" FontSize="16" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+
+        <!-- Journey Section -->
+        <StackLayout Padding="20" HorizontalOptions="FillAndExpand">
+            <Label Text="From:" FontSize="16" HorizontalOptions="StartAndExpand"/>
+            <Label Text="Through:" FontSize="16" HorizontalOptions="StartAndExpand"/>
+            <Label Text="To:" FontSize="16" HorizontalOptions="StartAndExpand"/>
+        </StackLayout>
+
+        <!-- Graph Section -->
+        <StackLayout Padding="20" HorizontalOptions="FillAndExpand">
+            <!-- Placeholder for the bar chart -->
+            <BoxView BackgroundColor="LightGray" HeightRequest="200" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+
+        <!-- Details Section -->
+        <StackLayout Padding="20" HorizontalOptions="FillAndExpand">
+            <Label Text="Temperature Information" FontSize="20"/>
+            <!-- Add your temperature details here -->
+        </StackLayout>
+
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

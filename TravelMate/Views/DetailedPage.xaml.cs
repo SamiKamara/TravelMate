@@ -19,5 +19,17 @@ namespace TravelMate
 
 			this.BindingContext = viewModel;
 		}
+
+		protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);
+        }
+
+        private void OnBackButtonClicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
 	}
 }
