@@ -25,7 +25,10 @@ namespace TravelMate
 			{ 
 				Entries = viewModel.entries,
 				BackgroundColor = SKColors.Transparent,
-				IsAnimated = false
+				IsAnimated = false,
+				LabelColor = SKColors.White,
+				LabelOrientation = Orientation.Horizontal,
+				ValueLabelOrientation = Orientation.Horizontal,
 			};
 		}
 
