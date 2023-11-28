@@ -53,5 +53,23 @@ namespace TravelMate
 
             return true;
         }
+
+        public void SavePreferences()
+        {
+            Preferences.Set("FromLocation", RouteData.From);
+            Preferences.Set("ToLocation", RouteData.To);
+        }
+
+        public void LoadPreferences()
+        {
+            string defaultFrom = string.Empty;
+            string defaultTo = string.Empty;
+
+            string storedFrom = Preferences.Get("FromLocation", defaultFrom);
+            string storedTo = Preferences.Get("ToLocation", defaultTo);
+
+            RouteData.From = !string.IsNullOrEmpty(storedFrom) ? storedFrom : defaultFrom;
+            RouteData.To = !string.IsNullOrEmpty(storedTo) ? storedTo : defaultTo;
+        }
     }
 }
