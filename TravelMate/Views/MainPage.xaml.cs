@@ -33,6 +33,13 @@ namespace TravelMate
         {
             base.OnAppearing();
             NavigationPage.SetHasNavigationBar(this, false);
+            viewModel.LoadPreferences();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            viewModel.SavePreferences();
         }
     }
 }

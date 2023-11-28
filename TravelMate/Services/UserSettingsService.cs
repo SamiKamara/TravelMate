@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace TravelMate.Services
 {
-    public class UserSettingsService
+    public class UserSettingsService : INotifyPropertyChanged
     {
         private string from;
         private string to;
@@ -15,7 +13,8 @@ namespace TravelMate.Services
         private int cloudiness;
         private double windSpeed;
 
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string From
         {
             get { return from; }
@@ -23,8 +22,9 @@ namespace TravelMate.Services
             {
                 if (from != value)
                 {
-                    LogUserSettingsChange("From", from, value);
                     from = value;
+                    OnPropertyChanged(nameof(From));
+                    LogUserSettingsChange("From", from, value);
                 }
             }
         }
@@ -36,8 +36,9 @@ namespace TravelMate.Services
             {
                 if (to != value)
                 {
-                    LogUserSettingsChange("To", to, value);
                     to = value;
+                    OnPropertyChanged(nameof(To));
+                    LogUserSettingsChange("To", to, value);
                 }
             }
         }
@@ -49,8 +50,9 @@ namespace TravelMate.Services
             {
                 if (temperature != value)
                 {
-                    LogUserSettingsChange("Temperature", temperature.ToString(), value.ToString());
                     temperature = value;
+                    OnPropertyChanged(nameof(Temperature));
+                    LogUserSettingsChange("Temperature", temperature.ToString(), value.ToString());
                 }
             }
         }
@@ -62,8 +64,9 @@ namespace TravelMate.Services
             {
                 if (rainChance != value)
                 {
-                    LogUserSettingsChange("RainChance", rainChance.ToString(), value.ToString());
                     rainChance = value;
+                    OnPropertyChanged(nameof(RainChance));
+                    LogUserSettingsChange("RainChance", rainChance.ToString(), value.ToString());
                 }
             }
         }
@@ -75,8 +78,9 @@ namespace TravelMate.Services
             {
                 if (cloudiness != value)
                 {
-                    LogUserSettingsChange("Cloudiness", cloudiness.ToString(), value.ToString());
                     cloudiness = value;
+                    OnPropertyChanged(nameof(Cloudiness));
+                    LogUserSettingsChange("Cloudiness", cloudiness.ToString(), value.ToString());
                 }
             }
         }
@@ -88,23 +92,31 @@ namespace TravelMate.Services
             {
                 if (windSpeed != value)
                 {
-                    LogUserSettingsChange("WindSpeed", windSpeed.ToString(), value.ToString());
                     windSpeed = value;
+                    OnPropertyChanged(nameof(WindSpeed));
+                    LogUserSettingsChange("WindSpeed", windSpeed.ToString(), value.ToString());
                 }
             }
         }
 
         public UserSettingsService()
         {
-            // Initialize the properties if needed
             from = "";
             to = "";
+            temperature = 0;
+            rainChance = 0;
+            cloudiness = 0;
+            windSpeed = 0.0;
         }
 
-        // Log changes to the console
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         private void LogUserSettingsChange(string propertyName, string oldValue, string newValue)
         {
-            System.Diagnostics.Debug.WriteLine($"User settings change: {propertyName} changed from '{oldValue}' to '{newValue}'");
+            Debug.WriteLine($"User settings change: {propertyName} changed from '{oldValue}' to '{newValue}'");
         }
     }
 }
