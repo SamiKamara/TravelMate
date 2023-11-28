@@ -1,12 +1,14 @@
 using Microsoft.Maui.Controls;
 using TravelMate.Services;
+using TravelMate.ViewModels;
 
 namespace TravelMate
 {   
-    public partial class WeatherPage : ContentPage
+    public partial class WeatherPage
     {
         private WeatherPageViewModel viewModel;
         public WeatherPage(UserSettingsService routeSettings)
+        public WeatherPage(WeatherPageViewModel vm)
         {
             InitializeComponent();
 
@@ -14,11 +16,7 @@ namespace TravelMate
 
             BindingContext = viewModel;
             
-        }
-
-        private async void OnViewResultsClicked(object sender, EventArgs e)
-        { 
-            await Navigation.PushAsync(new ResultsPage(viewModel.RouteData));
+            BindingContext = vm;
         }
 
         protected override void OnAppearing()
@@ -27,11 +25,6 @@ namespace TravelMate
             NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetHasBackButton(this, false);
         }
-
-        private void OnBackButtonClicked(object sender, EventArgs e)
-        {
-            Navigation.PopAsync();
-        }
-
     }
 }
+

@@ -1,3 +1,4 @@
+using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json.Linq;
 using System;
@@ -7,53 +8,18 @@ using TravelMate.ViewModels;
 
 namespace TravelMate
 {
-    public partial class ResultsPage
+    public partial class ResultsPage : ContentPage
     {
-        private ResultsPageViewModel viewModel;
-
-        public ResultsPage(UserSettingsService routeSettings)
+        public ResultsPage(ResultsPageViewModel vm)
         {
             InitializeComponent();
-            viewModel = new ResultsPageViewModel(routeSettings);
-            BindingContext = viewModel;
+            BindingContext = vm;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             NavigationPage.SetHasNavigationBar(this, false);
-            _ = OnResultsPageLoadedAsync();
-        }
-
-        private async Task OnResultsPageLoadedAsync()
-        {
-            try
-            {
-                await OnResultsPageLoaded();
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.Message, "OK");
-            }
-        }
-
-        private async Task OnResultsPageLoaded()
-        {
-            await viewModel.GetRouteAsync(ResultEditor);
-        }
-
-        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!int.TryParse(e.NewTextValue, out int result))
-            {
-                ((Entry)sender).Text = e.OldTextValue;
-                return;
-            }
-
-            if (result < 0 || result > 100)
-            {
-                ((Entry)sender).Text = e.OldTextValue;
-            }
         }
     }
 }
