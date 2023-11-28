@@ -1,12 +1,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TravelMate.ViewModels"
+             x:DataType="vm:ResultsPageViewModel"
              x:Class="TravelMate.ResultsPage"
              Title="ResultsPage"
              BackgroundColor="{StaticResource DefaultBackgroundColor}">
 
     <VerticalStackLayout>
         <ScrollView HeightRequest="1000">
-            <Editor x:Name="ResultEditor" TextColor="White" IsReadOnly="True" />
+            <Editor x:Name="ResultEditor" 
+             TextColor="White" 
+             IsReadOnly="True"
+             Text="{Binding ResultText.Text}"/>
         </ScrollView>
     </VerticalStackLayout>
 </ContentPage>

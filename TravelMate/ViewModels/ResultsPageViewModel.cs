@@ -5,22 +5,31 @@ using TravelMate.Services;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 using System.Text;
+using System.Windows.Input;
 
 namespace TravelMate.ViewModels
 {
     public class ResultsPageViewModel : ViewModelBase
     {
         private UserSettingsService routeData;
+        private Editor resultText;
 
-        public ResultsPageViewModel(UserSettingsService routeSettings)
+        public ResultsPageViewModel(UserSettingsService param)
         {
-            routeData = routeSettings;
+            routeData = param;
+            resultText = new Editor();
+            _ = OnResultsPageLoadedAsync();
         }
 
-        public async Task GetRouteAsync(Editor resultEditor)
-        {
-            resultEditor.Text = "";
+        public Editor ResultText { 
+            get { return resultText; } 
+            set {
+                resultText.Text = value.ToString();
+            } 
+        }
 
+        public async Task GetRouteAsync()
+        {
             JObject startLocation = await GeocodingHelper.GetLocation(routeData.From);
             if (startLocation["data"] == null || !startLocation["data"].HasValues)
             {
@@ -49,13 +58,15 @@ namespace TravelMate.ViewModels
             string[] inputValues = inputWeatherData.Split(',');
             string routeInfo = await GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon);
 
-            resultEditor.Text = 
+            ResultText.Text = 
                     $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}\n" +
                     $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}\n" +
                     $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n"
                     + routeInfo
                     + "\n\n"
                     + route.ToString();
+
+            
         }
 
         // This function demonstrates how to get the wanted data for routes
@@ -240,6 +251,37 @@ namespace TravelMate.ViewModels
             }
 
             return (totalPercentage / weatherValues.Length) * 100;
+        }
+
+        private async Task OnResultsPageLoadedAsync()
+        {
+            try
+            {
+                await OnResultsPageLoaded();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
+        private async Task OnResultsPageLoaded()
+        {
+            await GetRouteAsync();
+        }
+
+        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(e.NewTextValue, out int result))
+            {
+                ((Entry)sender).Text = e.OldTextValue;
+                return;
+            }
+
+            if (result < 0 || result > 100)
+            {
+                ((Entry)sender).Text = e.OldTextValue;
+            }
         }
     }
 }
