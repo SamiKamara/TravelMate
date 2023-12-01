@@ -1,3 +1,4 @@
+using Microcharts;
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json.Linq;
 using System;
@@ -5,6 +6,7 @@ using System.Threading.Tasks;
 using TravelMate.Model;
 using TravelMate.Services;
 using TravelMate.ViewModels;
+using SkiaSharp;
 
 namespace TravelMate
 {
@@ -19,6 +21,16 @@ namespace TravelMate
 			viewModel = new DetailedPageViewModel();
 
 			this.BindingContext = viewModel;
+
+			chartView.Chart = new LineChart() 
+			{ 
+				Entries = viewModel.entries,
+				BackgroundColor = SKColors.Transparent,
+				IsAnimated = false,
+				LabelColor = SKColors.White,
+				LabelOrientation = Orientation.Horizontal,
+				ValueLabelOrientation = Orientation.Horizontal,
+			};
 		}
 
 		protected override void OnAppearing()
