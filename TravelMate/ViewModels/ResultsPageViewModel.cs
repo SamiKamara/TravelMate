@@ -5,21 +5,66 @@ using TravelMate.Services;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 using System.Text;
+using System.Collections.ObjectModel;
+using TravelMate.Model;
+using System.Linq;
+using System.Windows.Input;
 
 namespace TravelMate.ViewModels
 {
     public class ResultsPageViewModel : ViewModelBase
     {
         private UserSettingsService routeData;
+        public ObservableCollection<RouteModel> routeModels { get; set; }
+        public ICommand SelectRouteCommand { get; }
 
+        private bool isBusy;
+        public bool IsBusy
+        {
+            get => isBusy;
+            set
+            {
+                if (isBusy != value)
+                {
+                    isBusy = value;
+                    OnPropertyChanged(nameof(IsBusy));
+                }
+            }
+        }
+
+        private bool isDataLoaded;
+        public bool IsDataLoaded
+        {
+            get => isDataLoaded;
+            set
+            {
+                if (isDataLoaded != value)
+                {
+                    isDataLoaded = value;
+                    OnPropertyChanged(nameof(IsDataLoaded));
+                }
+            }
+        }
+        
         public ResultsPageViewModel(UserSettingsService routeSettings)
         {
             routeData = routeSettings;
+            routeModels = new ObservableCollection<RouteModel>();
+            SelectRouteCommand = new Command<RouteModel>(ExecuteSelectedRoute);
         }
 
-        public async Task GetRouteAsync(Editor resultEditor)
+        private void ExecuteSelectedRoute(RouteModel selectedRoute)
         {
-            resultEditor.Text = "";
+            OnRouteSelected?.Invoke(selectedRoute);
+        }
+
+        public Action<RouteModel> OnRouteSelected { get; set;}
+
+        public async Task GetRouteAsync()
+        {
+            IsBusy = true;
+            IsDataLoaded = false;
+            
 
             JObject startLocation = await GeocodingHelper.GetLocation(routeData.From);
             if (startLocation["data"] == null || !startLocation["data"].HasValues)
@@ -40,41 +85,38 @@ namespace TravelMate.ViewModels
 
             double endLat = endLocation["data"][0]["latitude"].Value<double>();
             double endLon = endLocation["data"][0]["longitude"].Value<double>();
-            JObject endWeather = await WeatherHelper.GetWeather(endLat, endLon);
-            string endWeatherData = ExtractWeatherData(endWeather.ToString());
             string inputWeatherData = ExtractInputFieldsData();
-            double matchPercentage = CalculateMatchPercentage(endWeatherData, inputWeatherData);
+            
             JObject route = await DigitransitHelper.GetRoute(startLat, startLon, endLat, endLon);
-            string[] weatherValues = endWeatherData.Split(',');
-            string[] inputValues = inputWeatherData.Split(',');
-            string routeInfo = await GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon);
-
-            resultEditor.Text = 
-                    $"Desired destination weather: temperature; {inputValues[0]} rain; {inputValues[1]} cloudiness; {inputValues[2]} windspeed; {inputValues[3]}\n" +
-                    $"Destination weather: temperature; {weatherValues[0]} rain; {weatherValues[1]} cloudiness; {weatherValues[2]} windspeed; {weatherValues[3]}\n" +
-                    $"Match Percentage between desired weather and end locations weather: {matchPercentage}%\n\n"
-                    + routeInfo
-                    + "\n\n"
-                    + route.ToString();
+            
+            var routeInfo = await GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon, routeData);
+            
+            var sortedRouteInfo = routeInfo.OrderByDescending(route => route.Date.Date == DateTime.Today).ThenBy(route => route.Date).ThenBy(route => route.StartTime).ToList();
+            
+            foreach (var routeModel in sortedRouteInfo)
+            {
+                routeModels.Add(routeModel);
+            }
+            
+            IsBusy = false;
+            IsDataLoaded = true;
         }
 
         // This function demonstrates how to get the wanted data for routes
         // any non text form of output should draw inspiration from this
         // and make its own functions for similar purposes
-        public static async Task<string> GetCompactPublicTransportRoute(string json, string inputWeatherData, double endLat, double endLon)
+        public static async Task<List<RouteModel>> GetCompactPublicTransportRoute(string json, string inputWeatherData, double endLat, double endLon, UserSettingsService routeData)
         {
-            var sb = new StringBuilder();
             var jObject = JObject.Parse(json);
-
-            int routeNumber = 1;
-            double highestMatchPercentage = 0;
-            int highestMatchRouteNumber = 0;
-
+            var routes = new List<RouteModel>();
+            
             foreach (var itinerary in jObject["data"]["plan"]["itineraries"])
             {
-                sb.AppendLine($"\nRoute {routeNumber}:");
-                string arrivalTime = "";
-
+                var route = new RouteModel();
+                              
+                DateTimeOffset? itineraryStartTime = null;
+                DateTimeOffset? itineraryEndTime = null;
+               
                 foreach (var leg in itinerary["legs"])
                 {
                     if (leg.Value<bool>("transitLeg"))
@@ -83,42 +125,58 @@ namespace TravelMate.ViewModels
                         var endTime = DateTimeOffset.FromUnixTimeMilliseconds(leg.Value<long>("endTime")).ToLocalTime();
                         var duration = TimeSpan.FromSeconds(leg.Value<double>("duration"));
 
-                        sb.AppendFormat("Mode: {0}, Start: {1:HH:mm}, Duration: {2:hh\\:mm}\n",
-                                        leg["mode"],
-                                        startTime,
-                                        duration);
+                        if (endTime < startTime)
+                        {
+                            endTime = endTime.AddDays(1);
+                        }
 
-                        arrivalTime = endTime.ToString("HH:mm");
+                        itineraryStartTime ??= startTime;
+                        itineraryEndTime = endTime;
+                        
+                        var transportMode = new TransportMode
+                        {
+                            Mode = leg["mode"].ToString(),
+                            StartTime = startTime.ToString("HH:mm"),
+                            Duration = duration.ToString("hh\\:mm")
+                        };
+
+                        route.TransportModes.Add(transportMode);
                     }
                 }
 
-                if (!string.IsNullOrEmpty(arrivalTime))
+                if (itineraryStartTime.HasValue && itineraryEndTime.HasValue)
                 {
-                    sb.AppendLine($"Arrival Time: {arrivalTime}");
-
+                    string arrivalTime = itineraryEndTime.Value.ToString("HH:mm");
+                    
+                    // Get weather data for the end location at the arrival time
                     JObject forecastData = await WeatherHelper.GetWeatherForGivenTime(endLat, endLon, arrivalTime);
-                    string routeWeatherData = ExtractWeatherData(forecastData.ToString());
+                    string endWeatherData = ExtractWeatherData(forecastData.ToString());
+                    string[] weatherValues = endWeatherData.Split(',');
 
-                    double routeMatchPercentage = CalculateMatchPercentage(routeWeatherData, inputWeatherData);
+                    // Calculate the match percentage between the input data and the end weather data on arrival
+                    double routeMatchPercentage = CalculateMatchPercentage(endWeatherData, inputWeatherData);
                     routeMatchPercentage = Math.Round(routeMatchPercentage, 1);
-                    sb.AppendLine($"Weather match percentage on arrival: {routeMatchPercentage}%");
 
-                    if (routeMatchPercentage > highestMatchPercentage)
-                    {
-                        highestMatchPercentage = routeMatchPercentage;
-                        highestMatchRouteNumber = routeNumber;
-                    }
+                    // Convert the end weather data to the same format as the input data and assign it to the route object
+                    route.AssignWeatherData(weatherValues);
+
+                    // Assign the input values, the weather match percentage, date and duration related values to the route object
+                    route.CalculateTotalTravelTime(itineraryStartTime, itineraryEndTime);
+                    route.StartTime = itineraryStartTime.Value.ToString("HH:mm");
+                    route.ArrivalTime = arrivalTime;
+                    route.From = routeData.From;
+                    route.To = routeData.To;
+                    route.Date = itineraryStartTime.Value.Date;
+                    route.RouteMatchpercentage = routeMatchPercentage;
+                    route.InputTemperature = routeData.Temperature;
+                    route.InputRainChance = routeData.RainChance;
+                    route.InputCloudiness = routeData.Cloudiness;
+                    route.InputWindSpeed = routeData.WindSpeed;
+                   
+                    routes.Add(route);
                 }
-
-                routeNumber++;
-            }
-
-            if (highestMatchRouteNumber > 0)
-            {
-                sb.AppendLine($"\nRoute with highest weather match percentage: Route {highestMatchRouteNumber} ({highestMatchPercentage}%)");
-            }
-
-            return sb.ToString().Trim();
+            }        
+            return routes;
         }
 
         private Task DisplayAlert(string v1, string v2, string v3)
@@ -243,3 +301,4 @@ namespace TravelMate.ViewModels
         }
     }
 }
+
