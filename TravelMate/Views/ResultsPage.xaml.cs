@@ -52,7 +52,7 @@ namespace TravelMate
 
         private async void NavigateToRouteDetails(RouteModel routeModel)
         {
-            //await Navigation.PushAsync(new DetailedPage(routeModel));
+            await Navigation.PushAsync(new DetailedPage());
         }
     }
 }
