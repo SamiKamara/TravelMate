@@ -5,20 +5,20 @@ namespace TravelMate
 {   
     public partial class WeatherPage : ContentPage
     {
-        private UserSettingsService userSettingsService;
+        private WeatherPageViewModel viewModel;
         public WeatherPage(UserSettingsService routeSettings)
         {
             InitializeComponent();
 
-            userSettingsService = routeSettings;
+            viewModel = new WeatherPageViewModel(routeSettings);
 
-            this.BindingContext = userSettingsService;
+            BindingContext = viewModel;
             
         }
 
-        private void OnViewResultsClicked(object sender, EventArgs e)
+        private async void OnViewResultsClicked(object sender, EventArgs e)
         { 
-            Navigation.PushAsync(new ResultsPage(userSettingsService));
+            await Navigation.PushAsync(new ResultsPage(viewModel.RouteData));
         }
 
         protected override void OnAppearing()
