@@ -35,6 +35,16 @@ namespace TravelMate
         }
         public Command BackClickCommand { get; set; }
 
+        public string FromStr => $"From: {routeModel.From} ({routeModel.StartTime})";
+        public string ToStr => $"To: {routeModel.To} ({routeModel.ArrivalTime})";
+        public string RouteMatchStr => $"Route match: {routeModel.RouteMatchpercentage}%";
+        public string FormattedTotalTravelTimeStr => $"Total travel time: {routeModel.FormattedTotalTravelTime}h";
+        public string TemperateMatchStr => $"Temperate match: wanted: {routeModel.InputTemperature}%, got: {routeModel.ResultTemperature}%";
+        public string WeatherMatchStr => $"Rain match: wanted: {routeModel.InputRainChance}%, got: {routeModel.ResultRainChance}%";
+        public string CloudinessMatchStr => $"Cloudiness match: wanted: {routeModel.InputCloudiness}%, got: {routeModel.ResultCloudiness}%";
+        public string WindSpeedMatchStr => $"Wind speed match: wanted: {routeModel.InputWindSpeed}m/s, got: {routeModel.ResultWindSpeed}m/s";
+
+
         private async void Back()
         {
             try
