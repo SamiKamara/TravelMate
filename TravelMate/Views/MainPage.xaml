@@ -1,7 +1,8 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TravelMate.MainPage"
-             BackgroundColor="{StaticResource DefaultBackgroundColor}">
+             xmlns:vm="clr-namespace:TravelMate.ViewModels"
+             x:DataType="vm:MainPageViewModel"
+             x:Class="TravelMate.MainPage">
     <Grid 
         VerticalOptions="FillAndExpand">
         <Grid.ColumnDefinitions>
@@ -55,7 +56,7 @@
                            CharacterSpacing="0.6"
                            PlaceholderColor="White"
                            HorizontalOptions="FillAndExpand"
-                           Text="{Binding RouteData.From, Mode=TwoWay}"
+                           Text="{Binding RouteData.From}"
                            VerticalOptions="Center" />
                 </Frame>
 
@@ -68,7 +69,7 @@
                            CharacterSpacing="0.6"
                            PlaceholderColor="White"
                            HorizontalOptions="FillAndExpand"
-                           Text="{Binding RouteData.To, Mode=TwoWay}"
+                           Text="{Binding RouteData.To}"
                            VerticalOptions="Center" />
                 </Frame>
 
@@ -80,7 +81,7 @@
                     BackgroundColor="#44a5ff"
                     WidthRequest="150"
                     Margin="0,20,0,0" 
-                    Clicked="OnNextClicked" />
+                    Command="{Binding NavigateToWeather}" />
             </Grid>
         </Grid>
 

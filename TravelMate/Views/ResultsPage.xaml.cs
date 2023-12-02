@@ -1,3 +1,4 @@
+using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Newtonsoft.Json.Linq;
 using System;
@@ -8,52 +9,17 @@ using TravelMate.ViewModels;
 
 namespace TravelMate
 {
-    public partial class ResultsPage
+    public partial class ResultsPage : ContentPage
     {
-        private ResultsPageViewModel viewModel;
-
-        public ResultsPage(UserSettingsService routeSettings)
+        public ResultsPage(ResultsPageViewModel vm)
         {
             InitializeComponent();
-            
-            viewModel = new ResultsPageViewModel(routeSettings)
-            {
-                OnRouteSelected = NavigateToRouteDetails
-            };
-
-            BindingContext = viewModel;
+            BindingContext = vm;
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
             NavigationPage.SetHasNavigationBar(this, false);
-            NavigationPage.SetHasBackButton(this, false);
-            _ = OnResultsPageLoadedAsync();
-        }
-        private async Task OnResultsPageLoadedAsync()
-        {
-            try
-            {
-                await OnResultsPageLoaded();
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.Message, "OK");
-            }
-        }
-        private async Task OnResultsPageLoaded()
-        {
-            await viewModel.GetRouteAsync();
-        }
-
-        private void OnBackButtonClicked(object sender, EventArgs e)
-        {
-            Navigation.PopAsync();
-        }
-
-        private async void NavigateToRouteDetails(RouteModel routeModel)
-        {
-            await Navigation.PushAsync(new DetailedPage(routeModel));
         }
     }
 }

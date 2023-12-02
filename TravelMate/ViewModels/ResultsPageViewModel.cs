@@ -48,6 +48,9 @@ namespace TravelMate.ViewModels
         
         public ResultsPageViewModel(UserSettingsService routeSettings)
         {
+            routeData = param;
+            resultText = new Editor();
+            _ = OnResultsPageLoadedAsync();
             routeData = routeSettings;
             routeModels = new ObservableCollection<RouteModel>();
             BackClickCommand = new Command(Back);
@@ -314,6 +317,37 @@ namespace TravelMate.ViewModels
             }
 
             return (totalPercentage / weatherValues.Length) * 100;
+        }
+
+        private async Task OnResultsPageLoadedAsync()
+        {
+            try
+            {
+                await OnResultsPageLoaded();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
+        private async Task OnResultsPageLoaded()
+        {
+            await GetRouteAsync();
+        }
+
+        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!int.TryParse(e.NewTextValue, out int result))
+            {
+                ((Entry)sender).Text = e.OldTextValue;
+                return;
+            }
+
+            if (result < 0 || result > 100)
+            {
+                ((Entry)sender).Text = e.OldTextValue;
+            }
         }
     }
 }

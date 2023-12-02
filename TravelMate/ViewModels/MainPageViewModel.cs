@@ -3,17 +3,16 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using TravelMate.Services;
-using TravelMate.ViewModels;
 
-namespace TravelMate
+namespace TravelMate.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
         private UserSettingsService routeData;
 
-        public MainPageViewModel()
+        public MainPageViewModel(UserSettingsService param)
         {
-            routeData = new UserSettingsService();
+            routeData = param;
         }
 
         public UserSettingsService RouteData
@@ -28,7 +27,7 @@ namespace TravelMate
                 }
             }
         }
-        
+
         public async Task<bool> ValidateAndNavigateAsync()
         {
             routeData.From = routeData.From.Trim();
@@ -52,6 +51,40 @@ namespace TravelMate
             }
 
             return true;
+        }
+
+        public void SavePreferences()
+        {
+            Preferences.Set("FromLocation", RouteData.From);
+            Preferences.Set("ToLocation", RouteData.To);
+        }
+
+        public void LoadPreferences()
+        {
+            string defaultFrom = string.Empty;
+            string defaultTo = string.Empty;
+
+            string storedFrom = Preferences.Get("FromLocation", defaultFrom);
+            string storedTo = Preferences.Get("ToLocation", defaultTo);
+
+            RouteData.From = !string.IsNullOrEmpty(storedFrom) ? storedFrom : defaultFrom;
+            RouteData.To = !string.IsNullOrEmpty(storedTo) ? storedTo : defaultTo;
+        }
+
+        public Command NavigateToWeather =>
+            new Command(ClickEvent);
+
+        private async void ClickEvent(object obj)
+        {
+            if (await ValidateAndNavigateAsync())
+            {
+                dynamic viewModel = new WeatherPageViewModel(routeData);
+                await App.Current.MainPage.Navigation.PushAsync(new WeatherPage(viewModel));
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Invalid input or location data.", "OK");
+            }
         }
     }
 }

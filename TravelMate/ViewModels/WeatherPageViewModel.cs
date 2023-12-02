@@ -1,84 +1,57 @@
-using TravelMate.ViewModels;
+using System.Diagnostics;
 using TravelMate.Services;
 
-namespace TravelMate
+namespace TravelMate.ViewModels;
+
+public class WeatherPageViewModel : ViewModelBase
 {
-    public class WeatherPageViewModel : ViewModelBase
+    private UserSettingsService routeData;
+    public WeatherPageViewModel(UserSettingsService param)
     {
+        routeData = param;
+        BackClickCommand = new Command(Back);
+        NextClickCommand = new Command(Forward);
+    }
 
-        private UserSettingsService userSettings;
+    public Command BackClickCommand { get; set; }
 
-        public WeatherPageViewModel(UserSettingsService routeData)
+    public Command NextClickCommand { get; set; }
+
+    private async void Back()
+    {
+        try
         {
-            userSettings = routeData;
+            await App.Current.MainPage.Navigation.PopAsync();
         }
-
-        public string From
+        catch (Exception ex)
         {
-            get => userSettings.From;
+            Debug.WriteLine(ex);
         }
+    }
 
-        public string To
+    private async void Forward()
         {
-            get => userSettings.To;
-        }
-
-        public int Temperature
-        {
-            get => userSettings.Temperature;
-            set
+            try
             {
-                if (userSettings.Temperature != value)
-                {
-                    userSettings.Temperature = value;
-                    OnPropertyChanged(nameof(Temperature));
-                }
+                dynamic viewModel = new ResultsPageViewModel(routeData);
+                await App.Current.MainPage.Navigation.PushAsync(new ResultsPage(viewModel));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
-        public int RainChance
+    public UserSettingsService RouteData
+    {
+        get { return routeData; }
+        set
         {
-            get => userSettings.RainChance;
-            set
+            if (routeData != value)
             {
-                if (userSettings.RainChance != value)
-                {
-                    userSettings.RainChance = value;
-                    OnPropertyChanged(nameof(RainChance));
-                }
+                routeData = value;
+                OnPropertyChanged(nameof(RouteData));
             }
-        }
-
-        public int Cloudiness
-        {
-            get => userSettings.Cloudiness;
-            set
-            {
-                if (userSettings.Cloudiness != value)
-                {
-                    userSettings.Cloudiness = value;
-                    OnPropertyChanged(nameof(Cloudiness));
-                }
-            }
-        }
-
-        public double WindSpeed
-        {
-            get => userSettings.WindSpeed;
-            set
-            {
-                if (userSettings.WindSpeed != value)
-                {
-                    userSettings.WindSpeed = value;
-                    OnPropertyChanged(nameof(WindSpeed));
-                }
-            }
-        }
-
-        public UserSettingsService RouteData
-        {
-            get { return userSettings; }
-            set { userSettings = value; }
         }
     }
 }

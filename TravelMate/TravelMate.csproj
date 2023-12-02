@@ -48,6 +48,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="ViewModel\**" />
+	  <Compile Remove="ViewModel\**" />
+	  <EmbeddedResource Remove="ViewModel\**" />
+	  <MauiCss Remove="ViewModel\**" />
+	  <MauiXaml Remove="ViewModel\**" />
+	  <None Remove="ViewModel\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Images\mainright.svg" />
 	  <None Remove="Resources\Images\main_right_new.svg" />
 	</ItemGroup>
@@ -75,10 +84,6 @@
 	  <MauiXaml Update="DetailedPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ViewModel\" />
 	</ItemGroup>
 
 </Project>
