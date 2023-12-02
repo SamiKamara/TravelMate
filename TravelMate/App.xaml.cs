@@ -2,11 +2,12 @@
 {
     public partial class App : Application
     {
-        public App()
+        // All view pages have a dependency injection
+        // in their constructors like this
+        public App(MainPage mainPage)
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(mainPage);
         }
 
         protected override Window CreateWindow(IActivationState activationState)

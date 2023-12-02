@@ -92,6 +92,7 @@ namespace TravelMate.Services
             {
                 if (windSpeed != value)
                 {
+                    value = Math.Round(value, 2, MidpointRounding.AwayFromZero);
                     windSpeed = value;
                     OnPropertyChanged(nameof(WindSpeed));
                     LogUserSettingsChange("WindSpeed", windSpeed.ToString(), value.ToString());

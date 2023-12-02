@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using TravelMate.Services;
+using TravelMate.ViewModels;
 
 namespace TravelMate
 {
@@ -15,8 +17,13 @@ namespace TravelMate
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            // Used for dependency injection
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton(new UserSettingsService());
+
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
