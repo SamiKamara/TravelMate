@@ -10,7 +10,7 @@ public static class GeocodingHelper
         string parameter = $@"http://api.positionstack.com/v1/forward?access_key={SubscriptionKey}&query={cityName}";
 
         var response = await HttpClient.GetAsync(parameter);
-        string jsonResponse = await response.Content.ReadAsStringAsync();
+         string jsonResponse = await response.Content.ReadAsStringAsync();
 
         return JObject.Parse(jsonResponse);
     }

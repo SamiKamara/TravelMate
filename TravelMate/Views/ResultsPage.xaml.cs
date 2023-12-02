@@ -52,7 +52,12 @@ namespace TravelMate
 
         private async void NavigateToRouteDetails(RouteModel routeModel)
         {
-            await Navigation.PushAsync(new DetailedPage());
+
+            if (routeModel == null)
+            {
+                System.Diagnostics.Debug.WriteLine("Error: RouteModel is null");
+            }
+            await Navigation.PushAsync(new DetailedPage(routeModel));
         }
     }
 }

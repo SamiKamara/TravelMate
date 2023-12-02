@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microcharts;
 using Newtonsoft.Json.Linq;
 using SkiaSharp;
+using TravelMate.Model;
 using TravelMate.Services;
 using TravelMate.ViewModels;
 
@@ -11,6 +12,26 @@ namespace TravelMate
 {
     public class DetailedPageViewModel : ViewModelBase
     {
+        private RouteModel routeModel;
+
+        public RouteModel RouteModel
+        {
+            get => routeModel;
+            set
+            {
+                if (routeModel != value)
+                {
+                    routeModel = value;
+                    OnPropertyChanged(nameof(RouteModel));
+                }
+            }
+        }
+
+        public DetailedPageViewModel(RouteModel route)
+        {
+            routeModel = route;
+        }
+
         public ChartEntry[] entries = new[]
         {
             new ChartEntry(212)

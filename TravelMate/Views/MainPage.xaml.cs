@@ -21,7 +21,7 @@ namespace TravelMate
         {
             if (await viewModel.ValidateAndNavigateAsync())
             {
-                await Navigation.PushAsync(new DetailedPage());
+                await Navigation.PushAsync(new WeatherPage(viewModel.RouteData));
             }
             else
             {

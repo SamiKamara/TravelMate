@@ -108,6 +108,7 @@
                                     Grid.Column="2"
                                     BackgroundColor="#44A5FF"
                                     Command="{Binding BindingContext.SelectRouteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    CommandParameter="{Binding}"
                                     HorizontalOptions="End"
                                     Text="Full Details"
                                     TextColor="#FAFCFF"

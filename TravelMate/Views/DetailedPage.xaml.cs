@@ -14,11 +14,11 @@ namespace TravelMate
 	{
 		private DetailedPageViewModel viewModel;
 
-		public DetailedPage()
+		public DetailedPage(RouteModel routeModel)
 		{
 			InitializeComponent();
 
-			viewModel = new DetailedPageViewModel();
+			viewModel = new DetailedPageViewModel(routeModel);
 
 			this.BindingContext = viewModel;
 
