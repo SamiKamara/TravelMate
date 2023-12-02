@@ -54,6 +54,17 @@
 
         <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
             <StackLayout>
+                    <Label 
+                Text="Transport modes"
+                CharacterSpacing="-1.2"
+                FontSize="30"
+                Margin="0,0,0,20"/>
+                    <Label Text="{Binding TransportModesStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+            </StackLayout>
+        </Frame>
+
+        <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
+            <StackLayout>
                 <Label 
             Text="Route match"
             CharacterSpacing="-1.2"

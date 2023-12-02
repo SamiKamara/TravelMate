@@ -15,10 +15,12 @@ namespace TravelMate.Model
         private string duration; 
         private string startLocation;
         private string endLocation;
+        private string endTime;
 
         public string Mode { get => mode; set => mode = value; }
         public string StartTime { get => startTime; set => startTime = value; }
         public string Duration { get => duration; set => duration = value; }
+        public string EndTime { get => endTime; set => endTime = value; }
         public string StartLocation 
         { 
             get => startLocation; 

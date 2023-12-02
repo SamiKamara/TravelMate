@@ -153,6 +153,7 @@ namespace TravelMate.ViewModels
                         {
                             Mode = leg["mode"].ToString(),
                             StartTime = startTime.ToString("HH:mm"),
+                            EndTime = endTime.ToString("HH:mm"),
                             Duration = duration.ToString("hh\\:mm"),
                             StartLocation = leg["from"]["name"].ToString(),
                             EndLocation = leg["to"]["name"].ToString()

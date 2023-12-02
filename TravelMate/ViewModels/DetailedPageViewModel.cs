@@ -32,8 +32,6 @@ namespace TravelMate
         {
             routeModel = route;
             BackClickCommand = new Command(Back);
-
-            // Initialize the entries array after assigning routeModel
             InitializeChartEntries();
         }
 
@@ -47,6 +45,19 @@ namespace TravelMate
         public string WeatherMatchStr => $"Rain match: wanted: {routeModel.InputRainChance}%, got: {routeModel.ResultRainChance}%";
         public string CloudinessMatchStr => $"Cloudiness match: wanted: {routeModel.InputCloudiness}%, got: {routeModel.ResultCloudiness}%";
         public string WindSpeedMatchStr => $"Wind speed match: wanted: {routeModel.InputWindSpeed}m/s, got: {routeModel.ResultWindSpeed}m/s";
+
+        public string TransportModesStr
+        {
+            get
+            {
+                string result = "";
+                foreach (TransportMode mode in routeModel.TransportModes)
+                {
+                    result += $"{mode.Mode} from {mode.StartLocation} to {mode.EndLocation} ({mode.StartTime} - {mode.EndTime}), duration {mode.Duration}\n";
+                }
+                return result;
+            }
+        }
 
         public ChartEntry[] entries;
 
