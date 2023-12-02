@@ -7,6 +7,18 @@
     <ScrollView> 
         <VerticalStackLayout>
 
+        <!-- Back Button -->
+        <StackLayout Padding="20">
+            <Button
+            Margin="-10,0,0,0"
+            BackgroundColor="Transparent"
+            BorderWidth="0"
+            Command="{Binding BackClickCommand}"
+            HeightRequest="40"
+            HorizontalOptions="Start"
+            ImageSource="backbutton.png" />
+        </StackLayout>
+
         <!-- Title Section -->
         <StackLayout Padding="20">
             <Label Grid.Row="0"

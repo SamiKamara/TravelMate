@@ -29,18 +29,19 @@ public class WeatherPageViewModel : ViewModelBase
         }
     }
 
-    private async void Forward()
+     private async void Forward()
+    {
+        try
         {
-            try
-            {
-                dynamic viewModel = new ResultsPageViewModel(routeData);
-                await App.Current.MainPage.Navigation.PushAsync(new ResultsPage(viewModel));
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
+        //dynamic viewModel = new ResultsPageViewModel(routeData);
+        //await App.Current.MainPage.Navigation.PushAsync(new ResultsPage(viewModel));
+        await App.Current.MainPage.Navigation.PushAsync(new ResultsPage(routeData));
+    }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
         }
+    } 
     public string From
     {
         get => routeData.From;

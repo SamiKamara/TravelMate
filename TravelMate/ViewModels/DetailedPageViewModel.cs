@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microcharts;
 using Newtonsoft.Json.Linq;
@@ -30,7 +31,20 @@ namespace TravelMate
         public DetailedPageViewModel(RouteModel route)
         {
             routeModel = route;
-         
+            BackClickCommand = new Command(Back);
+        }
+        public Command BackClickCommand { get; set; }
+
+        private async void Back()
+        {
+            try
+            {
+                await App.Current.MainPage.Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         public ChartEntry[] entries = new[]
