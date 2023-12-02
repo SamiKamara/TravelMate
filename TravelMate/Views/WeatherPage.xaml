@@ -4,283 +4,199 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:TravelMate.ViewModels"
-    x:DataType="vm:WeatherPageViewModel"
     Title="WeatherPage"
+    x:DataType="vm:WeatherPageViewModel"
     BackgroundColor="{StaticResource DefaultBackgroundColor}">
 
-    <Grid Padding="20">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25*" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="75*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="35*" />
-            <ColumnDefinition Width="40*" />
-            <ColumnDefinition Width="25*" />
-        </Grid.ColumnDefinitions>
-
-
-
-        <Grid Grid.Row="0" Grid.ColumnSpan="2">
-
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Button
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="-12,10,0,0"
-                BackgroundColor="Transparent"
-                BorderWidth="0"
-                Command="{Binding BackClickCommand}"
-                HeightRequest="40"
-                HorizontalOptions="Start"
-                ImageSource="backbutton.png"/>
-
-            <Label
-                Grid.Row="2"
-                Grid.Column="0"
-                CharacterSpacing="-0.6"
-                FontAttributes="Bold"
-                FontSize="32"
-                Text="Your Route &amp; Your Travel Settings"
-                TextColor="#01BAE8" />
-
-            <Label
-                Grid.Row="3"
-                Grid.Column="0"
-                CharacterSpacing="-0.6"
-                FontAttributes="Bold"
-                FontSize="24"
-                Text="Choose the desired weather conditions on arrival" />
-
-        </Grid>
-
-        <Image
-            Grid.Row="0"
-            Grid.Column="2"
-            Aspect="AspectFit"
-            HorizontalOptions="End"
-            Source="weatherpageicon.png" />
-
-        <Frame
-            Grid.Row="2"
-            Grid.ColumnSpan="3"
-            BackgroundColor="#2A2D3E"
-            BorderColor="Transparent">
-
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
             <Grid>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
                 <Button
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    BackgroundColor="#44A5FF"
-                    Command="{Binding NextClickCommand}"
-                    HorizontalOptions="End"
-                    Text="Find Routes"
-                    TextColor="#FAFCFF"
-                    VerticalOptions="End" />
-
-            </Grid>
-
-        </Frame>
-
-
-
-        <Grid
-            Grid.Row="2"
-            Grid.Column="0"
-            Padding="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <StackLayout Grid.Column="0" VerticalOptions="Start">
-
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="-10,0,0,0"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Command="{Binding BackClickCommand}"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    ImageSource="backbutton.png" />
+                <VerticalStackLayout Grid.Row="1" Grid.Column="0">
                     <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        CharacterSpacing="-1.2"
                         FontAttributes="Bold"
-                        Text="From"
+                        FontSize="40"
+                        Text="Your Route &amp; Your Travel Settings!"
                         TextColor="#01BAE8" />
-                    <Label Text="{Binding RouteData.From}" />
-
-                </StackLayout>
-
-                <StackLayout Grid.Column="0" VerticalOptions="End">
-
                     <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        CharacterSpacing="-1.2"
                         FontAttributes="Bold"
-                        Text="To"
-                        TextColor="#01BAE8" />
-                    <Label Text="{Binding RouteData.To}" />
-
-                </StackLayout>
+                        FontSize="30"
+                        Text="Choose the desired weather conditions on arrival:" />
+                </VerticalStackLayout>
 
                 <Image
+                    Grid.RowSpan="2"
                     Grid.Column="1"
-                    Margin="30,0,0,0"
-                    Aspect="AspectFit"
-                    HorizontalOptions="Start"
-                    Source="routeicon.png" />
-
-                <StackLayout
-                    Grid.Column="2"
-                    Margin="20,0,0,0"
-                    HorizontalOptions="Center"
-                    Spacing="32"
-                    VerticalOptions="Center">
-
-                    <StackLayout Orientation="Horizontal" Spacing="30">
-
-                        <Image
-                            HeightRequest="30"
-                            Source="temperatureicon.png"
-                            VerticalOptions="Center"
-                            WidthRequest="30" />
-                        <VerticalStackLayout>
-                            <Label
-                                FontAttributes="Bold"
-                                Text="Temperature"
-                                TextColor="#01BAE8"
-                                VerticalOptions="Center" />
-                            <Label Text="{Binding RouteData.Temperature, StringFormat='{0}°C'}" />
-                        </VerticalStackLayout>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" Spacing="30">
-
-                        <Image
-                            HeightRequest="30"
-                            Source="rainicon.png"
-                            VerticalOptions="Center"
-                            WidthRequest="30" />
-
-                        <VerticalStackLayout>
-                            <Label
-                                FontAttributes="Bold"
-                                Text="Chance Of Rain"
-                                TextColor="#01BAE8"
-                                VerticalOptions="Center" />
-                            <Label Text="{Binding RouteData.RainChance, StringFormat='{0}%'}" />
-                        </VerticalStackLayout>
-
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" Spacing="30">
-
-                        <Image
-                            HeightRequest="30"
-                            Source="cloudicon.png"
-                            VerticalOptions="Center"
-                            WidthRequest="30" />
-
-                        <VerticalStackLayout>
-                            <Label
-                                FontAttributes="Bold"
-                                Text="Cloudiness"
-                                TextColor="#01BAE8"
-                                VerticalOptions="Center" />
-                            <Label Text="{Binding RouteData.Cloudiness, StringFormat='{0}%'}" />
-                        </VerticalStackLayout>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" Spacing="30">
-
-                        <Image
-                            HeightRequest="30"
-                            Source="windicon.png"
-                            VerticalOptions="Center"
-                            WidthRequest="30" />
-
-                        <VerticalStackLayout>
-                            <Label
-                                FontAttributes="Bold"
-                                Text="Wind Speed"
-                                TextColor="#01BAE8"
-                                VerticalOptions="Center" />
-                            <Label Text="{Binding RouteData.WindSpeed, StringFormat='{0} m/s'}" />
-                        </VerticalStackLayout>
-
-                    </StackLayout>
-
-                </StackLayout>
-
+                    HeightRequest="150"
+                    HorizontalOptions="End"
+                    Source="weatherpageicon.png" />
             </Grid>
+            <Frame
+                Margin="0,20,0,0"
+                BackgroundColor="#2A2D3E"
+                BorderColor="Transparent">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.10*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.45*" />
+                        <ColumnDefinition Width="0.15*" />
+                    </Grid.ColumnDefinitions>
 
-        </Grid>
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start">
+                        <Label
+                            FontAttributes="Bold"
+                            Text="From"
+                            TextColor="#01BAE8" />
+                        <Label
+                            FontAttributes="Bold"
+                            LineBreakMode="TailTruncation"
+                            Text="{Binding RouteData.From}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="End">
+                        <Label
+                            FontAttributes="Bold"
+                            Text="To"
+                            TextColor="#01BAE8" />
+                        <Label
+                            FontAttributes="Bold"
+                            LineBreakMode="TailTruncation"
+                            Text="{Binding RouteData.To}" />
+                    </VerticalStackLayout>
 
-        <StackLayout
-            Grid.Row="2"
-            Grid.Column="1"
-            Margin="30,0,0,0"
-            Spacing="40"
-            VerticalOptions="Center">
+                    <Image
+                        Grid.Column="1"
+                        Margin="20,0,0,0"
+                        HeightRequest="300"
+                        HorizontalOptions="Start"
+                        Source="routeicon.png" />
+                    <StackLayout
+                        Grid.Column="2"
+                        Spacing="20"
+                        VerticalOptions="Center">
+                        <StackLayout Orientation="Horizontal" Spacing="30">
+                            <Image HeightRequest="30" Source="temperatureicon.png" />
+                            <VerticalStackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    Text="Temperature"
+                                    TextColor="#01BAE8"
+                                    VerticalOptions="Center" />
+                                <Label Text="{Binding RouteData.Temperature, StringFormat='{0}°C'}" />
+                            </VerticalStackLayout>
+                        </StackLayout>
 
-            <Slider
-                x:Name="TemperatureSlider"
-                HorizontalOptions="FillAndExpand"
-                Maximum="32"
-                Minimum="-32"
-                VerticalOptions="Center"
-                Value="{Binding RouteData.Temperature}" />
+                        <StackLayout Orientation="Horizontal" Spacing="30">
+                            <Image HeightRequest="30" Source="rainicon.png" />
+                            <VerticalStackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    Text="Chane Of Rain"
+                                    TextColor="#01BAE8"
+                                    VerticalOptions="Center" />
+                                <Label Text="{Binding RouteData.RainChance, StringFormat='{0}%'}" />
+                            </VerticalStackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="30">
+                            <Image HeightRequest="30" Source="cloudicon.png" />
+                            <VerticalStackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    Text="Cloudiness"
+                                    TextColor="#01BAE8"
+                                    VerticalOptions="Center" />
+                                <Label Text="{Binding RouteData.Cloudiness, StringFormat='{0}%'}" />
+                            </VerticalStackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="30">
+                            <Image HeightRequest="30" Source="windicon.png" />
+                            <VerticalStackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    Text="Wind Speed"
+                                    TextColor="#01BAE8"
+                                    VerticalOptions="Center" />
+                                <Label Text="{Binding RouteData.WindSpeed, StringFormat='{0} m/s'}" />
+                            </VerticalStackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Column="3"
+                        Spacing="25"
+                        VerticalOptions="Center">
+                        <Slider
+                            x:Name="TemperatureSlider"
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="32"
+                            Minimum="-32"
+                            VerticalOptions="Center"
+                            Value="{Binding RouteData.Temperature}" />
 
-            <Slider
-                x:Name="RainSlider"
-                HorizontalOptions="FillAndExpand"
-                Maximum="100"
-                Minimum="0"
-                Value="{Binding RouteData.RainChance}" />
+                        <Slider
+                            x:Name="RainSlider"
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="100"
+                            Minimum="0"
+                            Value="{Binding RouteData.RainChance}" />
 
-            <Slider
-                x:Name="CloudinessSlider"
-                HorizontalOptions="FillAndExpand"
-                Maximum="100"
-                Minimum="0"
-                VerticalOptions="Center"
-                Value="{Binding RouteData.Cloudiness}" />
+                        <Slider
+                            x:Name="CloudinessSlider"
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="100"
+                            Minimum="0"
+                            VerticalOptions="Center"
+                            Value="{Binding RouteData.Cloudiness}" />
 
-            <Slider
-                x:Name="WindSpeedSlider"
-                HorizontalOptions="FillAndExpand"
-                Maximum="10.0"
-                Minimum="0"
-                VerticalOptions="Center"
-                Value="{Binding RouteData.WindSpeed}" />
-        </StackLayout>
-
-    </Grid>
+                        <Slider
+                            x:Name="WindSpeedSlider"
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="10.0"
+                            Minimum="0"
+                            VerticalOptions="Center"
+                            Value="{Binding RouteData.WindSpeed}" />
+                    </StackLayout>
+                    <Button
+                        Grid.Column="4"
+                        BackgroundColor="#44A5FF"
+                        Command="{Binding NextClickCommand}"
+                        HorizontalOptions="End"
+                        Text="Find Routes"
+                        TextColor="#FAFCFF"
+                        VerticalOptions="End" />
+                </Grid>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

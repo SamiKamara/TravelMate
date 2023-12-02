@@ -24,6 +24,12 @@ public static class DigitransitHelper
                     startTime
                     endTime
                     mode
+                    from {{
+                        name
+                    }}
+                    to {{
+                        name
+                    }}
                     duration
                     realTime
                     distance

@@ -1,0 +1,68 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TravelMate.DetailedPage"
+             xmlns:micro="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             Title="DetailedPage"
+             BackgroundColor="{StaticResource DefaultBackgroundColor}">
+    <ScrollView> 
+        <VerticalStackLayout>
+
+        <!-- Title Section -->
+        <StackLayout Padding="20">
+            <Label Grid.Row="0"
+                    Text="Results Of Your Trip!"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"
+                    FontAttributes="Bold"
+                    CharacterSpacing="-1.2"
+                    TextColor="#01bae8"
+                    FontSize="40"
+                    Margin="0,0,0,0"/>
+            <Label
+                Text="You may want to take a look at the following information before you start your trip."
+                FontAttributes="Bold"
+                CharacterSpacing="-1.2"
+                FontSize="30"
+                Margin="0,0,0,20"/>
+        </StackLayout>
+
+        <!-- Journey Section -->
+        <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
+            <StackLayout>
+            <Label 
+            Text="Route"
+            CharacterSpacing="-1.2"
+            FontSize="30"
+            Margin="0,0,0,20"/>
+                <Label Text="From:" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                <Label Text="Through:" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                <Label Text="To:" FontSize="16" HorizontalOptions="StartAndExpand"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Graph Section -->
+        <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
+            <StackLayout>
+                <Label
+                Text="Temperature graph"
+                CharacterSpacing="-1.2"
+                FontSize="30"
+                Margin="0,0,0,20"/>
+                <micro:ChartView x:Name="chartView" HeightRequest="300" />
+            </StackLayout>
+        </Frame>
+
+        <!-- Details Section -->
+        <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
+            <StackLayout Padding="20" HorizontalOptions="FillAndExpand">
+                <Label
+                Text="Weather details"
+                CharacterSpacing="-1.2"
+                FontSize="30"
+                Margin="0,0,0,20"/>
+            </StackLayout>
+        </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

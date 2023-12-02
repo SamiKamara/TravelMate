@@ -1,17 +1,151 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:TravelMate.ViewModels"
-             x:DataType="vm:ResultsPageViewModel"
-             x:Class="TravelMate.ResultsPage"
-             Title="ResultsPage"
-             BackgroundColor="{StaticResource DefaultBackgroundColor}">
+<ContentPage
+    x:Class="TravelMate.ResultsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="ResultsPage"
+    BackgroundColor="{StaticResource DefaultBackgroundColor}">
 
-    <VerticalStackLayout>
-        <ScrollView HeightRequest="1000">
-            <Editor x:Name="ResultEditor" 
-             TextColor="White" 
-             IsReadOnly="True"
-             Text="{Binding ResultText.Text}"/>
+    <Grid>
+
+        <ScrollView>
+
+            <VerticalStackLayout Padding="20">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Button
+                        Margin="-10,0,0,0"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        Command="{Binding BackClickCommand}"
+                        HeightRequest="40"
+                        HorizontalOptions="Start"
+                        ImageSource="backbutton.png" />
+                    <VerticalStackLayout Grid.Row="1" Margin="0,0,0,20">
+                        <Label
+                            CharacterSpacing="-1.2"
+                            FontAttributes="Bold"
+                            FontSize="40"
+                            HorizontalOptions="Start"
+                            Text="Here Are The Results For Your Search!"
+                            TextColor="#01BAE8" />
+                        <Label
+                            CharacterSpacing="-1.2"
+                            FontAttributes="Bold"
+                            FontSize="30"
+                            HorizontalOptions="Start"
+                            Text="Check the full details for the found departures from down below:"
+                            TextColor="#FAFCFF" />
+
+
+
+                    </VerticalStackLayout>
+
+                </Grid>
+
+                <CollectionView ItemsSource="{Binding routeModels}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                                Margin="0,0,0,20"
+                                Padding="20"
+                                BackgroundColor="#2A2D3E"
+                                BorderColor="Transparent">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        FontAttributes="Bold"
+                                        FontSize="22"
+                                        Text="{Binding FormattedDate}"
+                                        VerticalOptions="Center" />
+
+                                    <Grid
+                                        Grid.Column="1"
+                                        ColumnSpacing="20"
+                                        VerticalOptions="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                            <Image
+                                                Margin="0,0,10,0"
+                                                HeightRequest="25"
+                                                HorizontalOptions="Start"
+                                                Source="resultsiconstart.png" />
+                                            <VerticalStackLayout VerticalOptions="Center">
+                                                <Label
+                                                    FontSize="18"
+                                                    Text="{Binding From}"
+                                                    TextColor="#01BAE8" />
+                                                <Label FontSize="18" Text="{Binding StartTime}" />
+                                            </VerticalStackLayout>
+
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                            <Image
+                                                Margin="0,0,10,0"
+                                                HeightRequest="25"
+                                                HorizontalOptions="Start"
+                                                Source="resultsicontime.png" />
+                                            <VerticalStackLayout VerticalOptions="Center">
+                                                <Label
+                                                    FontSize="18"
+                                                    Text="Duration"
+                                                    TextColor="#01BAE8" />
+                                                <Label FontSize="18" Text="{Binding FormattedTotalTravelTime}" />
+                                            </VerticalStackLayout>
+
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2" Orientation="Horizontal">
+                                            <Image
+                                                Margin="0,0,10,0"
+                                                HeightRequest="25"
+                                                HorizontalOptions="Start"
+                                                Source="reultsiconto.png" />
+                                            <VerticalStackLayout VerticalOptions="Center">
+                                                <Label
+                                                    FontSize="18"
+                                                    Text="{Binding To}"
+                                                    TextColor="#01BAE8" />
+                                                <Label FontSize="18" Text="{Binding ArrivalTime}" />
+                                            </VerticalStackLayout>
+                                        </StackLayout>
+                                    </Grid>
+
+                                    <Button
+                                        Grid.Column="2"
+                                        BackgroundColor="#44A5FF"
+                                        Command="{Binding BindingContext.SelectRouteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding}"
+                                        HorizontalOptions="End"
+                                        Text="Full Details"
+                                        TextColor="#FAFCFF"
+                                        VerticalOptions="Center" />
+
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
         </ScrollView>
-    </VerticalStackLayout>
+        <ActivityIndicator
+            HorizontalOptions="CenterAndExpand"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="CenterAndExpand" />
+    </Grid>
 </ContentPage>

@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
+using TravelMate.Model;
 using TravelMate.Services;
 using TravelMate.ViewModels;
 
@@ -15,7 +16,6 @@ namespace TravelMate
             InitializeComponent();
             BindingContext = vm;
         }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
