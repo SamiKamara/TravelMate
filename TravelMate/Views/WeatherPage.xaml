@@ -45,7 +45,8 @@
                 Command="{Binding BackClickCommand}"
                 HeightRequest="40"
                 HorizontalOptions="Start"
-                ImageSource="backbutton.png" />
+                ImageSource="backbutton.png"
+                Command="{Binding BackClickCommand}"/>
 
             <Label
                 Grid.Row="2"
