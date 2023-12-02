@@ -32,7 +32,11 @@ namespace TravelMate
         {
             routeModel = route;
             BackClickCommand = new Command(Back);
+
+            // Initialize the entries array after assigning routeModel
+            InitializeChartEntries();
         }
+
         public Command BackClickCommand { get; set; }
 
         public string FromStr => $"From: {routeModel.From} ({routeModel.StartTime})";
@@ -44,6 +48,7 @@ namespace TravelMate
         public string CloudinessMatchStr => $"Cloudiness match: wanted: {routeModel.InputCloudiness}%, got: {routeModel.ResultCloudiness}%";
         public string WindSpeedMatchStr => $"Wind speed match: wanted: {routeModel.InputWindSpeed}m/s, got: {routeModel.ResultWindSpeed}m/s";
 
+        public ChartEntry[] entries;
 
         private async void Back()
         {
@@ -57,36 +62,39 @@ namespace TravelMate
             }
         }
 
-        public ChartEntry[] entries = new[]
+        private void InitializeChartEntries()
         {
-            new ChartEntry(212)
+            entries = new[]
             {
-                Label = "Test1",
-                ValueLabel = "212",
-                Color = SKColor.Parse("#44a5ff"),
-                ValueLabelColor = SKColors.White
-            },
-            new ChartEntry(248)
-            {
-                Label = "Test2",
-                ValueLabel = "248",
-                Color = SKColor.Parse("#44a5ff"),
-                ValueLabelColor = SKColors.White
-            },
-            new ChartEntry(129)
-            {
-                Label = "Test3",
-                ValueLabel = "129",
-                Color = SKColor.Parse("#44a5ff"),
-                ValueLabelColor = SKColors.White
-            },
-            new ChartEntry(69)
-            {
-                Label = "Test4",
-                ValueLabel = "69",
-                Color = SKColor.Parse("#44a5ff"),
-                ValueLabelColor = SKColors.White
-            }
-        };
+                new ChartEntry((float)routeModel.TemperatureMatchPercentage)
+                {
+                    Label = "Temperature match",
+                    ValueLabel = (routeModel.TemperatureMatchPercentage).ToString() + "%",
+                    Color = SKColor.Parse("#f1b44c"),
+                    ValueLabelColor = SKColors.White
+                },
+                new ChartEntry((float)routeModel.RainChanceMatchPercentage)
+                {
+                    Label = "Rain match",
+                    ValueLabel = (routeModel.RainChanceMatchPercentage).ToString() + "%",
+                    Color = SKColor.Parse("#34c38f"),
+                    ValueLabelColor = SKColors.White
+                },
+                new ChartEntry((float)routeModel.CloudinessMatchPercentage)
+                {
+                    Label = "Cloudiness match",
+                    ValueLabel = (routeModel.CloudinessMatchPercentage).ToString() + "%",
+                    Color = SKColor.Parse("#556ee6"),
+                    ValueLabelColor = SKColors.White
+                },
+                new ChartEntry((float)routeModel.WindSpeedMatchPercentage)
+                {
+                    Label = "Wind speed match",
+                    ValueLabel = (routeModel.WindSpeedMatchPercentage).ToString() + "%",
+                    Color = SKColor.Parse("#e83e8c"),
+                    ValueLabelColor = SKColors.White
+                }
+            };
+        }
     }
 }
