@@ -11,15 +11,29 @@ namespace TravelMate
 {
     public partial class ResultsPage : ContentPage
     {
-        public ResultsPage(ResultsPageViewModel vm)
+        private ResultsPageViewModel viewModel;
+        //public ResultsPage(ResultsPageViewModel vm)
+        public ResultsPage(UserSettingsService routeSettings)
         {
             InitializeComponent();
-            BindingContext = vm;
+            //BindingContext = vm;
+            viewModel = new ResultsPageViewModel(routeSettings)
+            {
+                OnRouteSelected = NavigateToRouteDetails
+            };
+
+            BindingContext = viewModel;
+
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
             NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private async void NavigateToRouteDetails(RouteModel routeModel)
+        {
+            await Navigation.PushAsync(new DetailedPage(routeModel));
         }
     }
 }

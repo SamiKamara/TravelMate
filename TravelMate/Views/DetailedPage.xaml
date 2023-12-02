@@ -7,6 +7,18 @@
     <ScrollView> 
         <VerticalStackLayout>
 
+        <!-- Back Button -->
+        <StackLayout Padding="20">
+            <Button
+            Margin="-10,0,0,0"
+            BackgroundColor="Transparent"
+            BorderWidth="0"
+            Command="{Binding BackClickCommand}"
+            HeightRequest="40"
+            HorizontalOptions="Start"
+            ImageSource="backbutton.png" />
+        </StackLayout>
+
         <!-- Title Section -->
         <StackLayout Padding="20">
             <Label Grid.Row="0"
@@ -29,14 +41,40 @@
         <!-- Journey Section -->
         <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
             <StackLayout>
-            <Label 
-            Text="Route"
+                <Label 
+                Text="Journey"
+                CharacterSpacing="-1.2"
+                FontSize="30"
+                Margin="0,0,0,20"/>
+                <Label Text="{Binding FromStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding ToStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding FormattedTotalTravelTimeStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+            </StackLayout>
+        </Frame>
+
+        <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
+            <StackLayout>
+                    <Label 
+                Text="Transport modes"
+                CharacterSpacing="-1.2"
+                FontSize="30"
+                Margin="0,0,0,20"/>
+                    <Label Text="{Binding TransportModesStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+            </StackLayout>
+        </Frame>
+
+        <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
+            <StackLayout>
+                <Label 
+            Text="Route match"
             CharacterSpacing="-1.2"
             FontSize="30"
             Margin="0,0,0,20"/>
-                <Label Text="From:" FontSize="16" HorizontalOptions="StartAndExpand"/>
-                <Label Text="Through:" FontSize="16" HorizontalOptions="StartAndExpand"/>
-                <Label Text="To:" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding RouteMatchStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding TemperatureMatchStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding WeatherMatchStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding CloudinessMatchStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding WindSpeedMatchStr}" FontSize="16" HorizontalOptions="StartAndExpand"/>
             </StackLayout>
         </Frame>
 
@@ -44,22 +82,11 @@
         <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
             <StackLayout>
                 <Label
-                Text="Temperature graph"
+                Text="Match percentages"
                 CharacterSpacing="-1.2"
                 FontSize="30"
                 Margin="0,0,0,20"/>
                 <micro:ChartView x:Name="chartView" HeightRequest="300" />
-            </StackLayout>
-        </Frame>
-
-        <!-- Details Section -->
-        <Frame CornerRadius="20" Margin="20" BackgroundColor="#2a2d3e" BorderColor="Transparent">
-            <StackLayout Padding="20" HorizontalOptions="FillAndExpand">
-                <Label
-                Text="Weather details"
-                CharacterSpacing="-1.2"
-                FontSize="30"
-                Margin="0,0,0,20"/>
             </StackLayout>
         </Frame>
 

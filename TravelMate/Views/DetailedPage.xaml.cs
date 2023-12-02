@@ -22,14 +22,12 @@ namespace TravelMate
 
 			this.BindingContext = viewModel;
 
-			chartView.Chart = new LineChart() 
+			chartView.Chart = new RadialGaugeChart()
 			{ 
 				Entries = viewModel.entries,
 				BackgroundColor = SKColors.Transparent,
 				IsAnimated = false,
 				LabelColor = SKColors.White,
-				LabelOrientation = Orientation.Horizontal,
-				ValueLabelOrientation = Orientation.Horizontal,
 			};
 		}
 
