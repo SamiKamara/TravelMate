@@ -42,10 +42,10 @@
                 Margin="-12,10,0,0"
                 BackgroundColor="Transparent"
                 BorderWidth="0"
+                Command="{Binding BackClickCommand}"
                 HeightRequest="40"
                 HorizontalOptions="Start"
-                ImageSource="backbutton.png"
-                Command="{Binding BackClickCommand}"/>
+                ImageSource="backbutton.png" />
 
             <Label
                 Grid.Row="2"
@@ -93,10 +93,12 @@
                 <Button
                     Grid.Row="1"
                     Grid.Column="1"
+                    BackgroundColor="#44A5FF"
+                    Command="{Binding NextClickCommand}"
                     HorizontalOptions="End"
-                    Text="View Results &gt;"
-                    VerticalOptions="End"
-                    Command="{Binding NextClickCommand}"/>
+                    Text="Find Routes"
+                    TextColor="#FAFCFF"
+                    VerticalOptions="End" />
 
             </Grid>
 
@@ -148,15 +150,15 @@
                 </StackLayout>
 
                 <Image
-                    Margin="30,0,0,0"
                     Grid.Column="1"
+                    Margin="30,0,0,0"
                     Aspect="AspectFit"
                     HorizontalOptions="Start"
                     Source="routeicon.png" />
 
                 <StackLayout
-                    Margin="20,0,0,0"
                     Grid.Column="2"
+                    Margin="20,0,0,0"
                     HorizontalOptions="Center"
                     Spacing="32"
                     VerticalOptions="Center">
@@ -168,13 +170,14 @@
                             Source="temperatureicon.png"
                             VerticalOptions="Center"
                             WidthRequest="30" />
-
-                        <Label
-                            FontAttributes="Bold"
-                            Text="Temperature"
-                            TextColor="#01BAE8"
-                            VerticalOptions="Center" />
-
+                        <VerticalStackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Temperature"
+                                TextColor="#01BAE8"
+                                VerticalOptions="Center" />
+                            <Label Text="{Binding RouteData.Temperature, StringFormat='{0}°C'}" />
+                        </VerticalStackLayout>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Spacing="30">
@@ -185,11 +188,14 @@
                             VerticalOptions="Center"
                             WidthRequest="30" />
 
-                        <Label
-                            FontAttributes="Bold"
-                            Text="Chance Of Rain"
-                            TextColor="#01BAE8"
-                            VerticalOptions="Center" />
+                        <VerticalStackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Chance Of Rain"
+                                TextColor="#01BAE8"
+                                VerticalOptions="Center" />
+                            <Label Text="{Binding RouteData.RainChance, StringFormat='{0}%'}" />
+                        </VerticalStackLayout>
 
                     </StackLayout>
 
@@ -201,12 +207,14 @@
                             VerticalOptions="Center"
                             WidthRequest="30" />
 
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="14"
-                            Text="Cloudiness"
-                            TextColor="#01BAE8"
-                            VerticalOptions="Center" />
+                        <VerticalStackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Cloudiness"
+                                TextColor="#01BAE8"
+                                VerticalOptions="Center" />
+                            <Label Text="{Binding RouteData.Cloudiness, StringFormat='{0}%'}" />
+                        </VerticalStackLayout>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Spacing="30">
@@ -217,11 +225,14 @@
                             VerticalOptions="Center"
                             WidthRequest="30" />
 
-                        <Label
-                            FontAttributes="Bold"
-                            Text="Wind Speed"
-                            TextColor="#01BAE8"
-                            VerticalOptions="Center" />
+                        <VerticalStackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Wind Speed"
+                                TextColor="#01BAE8"
+                                VerticalOptions="Center" />
+                            <Label Text="{Binding RouteData.WindSpeed, StringFormat='{0} m/s'}" />
+                        </VerticalStackLayout>
 
                     </StackLayout>
 
@@ -234,7 +245,8 @@
         <StackLayout
             Grid.Row="2"
             Grid.Column="1"
-            Spacing="30"
+            Margin="30,0,0,0"
+            Spacing="40"
             VerticalOptions="Center">
 
             <Slider

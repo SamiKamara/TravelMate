@@ -19,14 +19,9 @@ namespace TravelMate
 
             // Used for dependency injection
             builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<WeatherPage>();
-            builder.Services.AddSingleton<ResultsPage>();
-
             builder.Services.AddSingleton<MainPageViewModel>();
-            builder.Services.AddSingleton<WeatherPageViewModel>();
-            builder.Services.AddSingleton<ResultsPageViewModel>();
-
             builder.Services.AddSingleton(new UserSettingsService());
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

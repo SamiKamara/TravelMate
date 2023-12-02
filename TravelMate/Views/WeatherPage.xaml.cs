@@ -6,16 +6,9 @@ namespace TravelMate
 {   
     public partial class WeatherPage
     {
-        private WeatherPageViewModel viewModel;
-        public WeatherPage(UserSettingsService routeSettings)
         public WeatherPage(WeatherPageViewModel vm)
         {
             InitializeComponent();
-
-            viewModel = new WeatherPageViewModel(routeSettings);
-
-            BindingContext = viewModel;
-            
             BindingContext = vm;
         }
 
