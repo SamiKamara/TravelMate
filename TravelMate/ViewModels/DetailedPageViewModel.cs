@@ -30,6 +30,7 @@ namespace TravelMate
         public DetailedPageViewModel(RouteModel route)
         {
             routeModel = route;
+         
         }
 
         public ChartEntry[] entries = new[]

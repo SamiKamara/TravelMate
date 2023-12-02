@@ -38,7 +38,7 @@
                             FontAttributes="Bold"
                             FontSize="30"
                             HorizontalOptions="Start"
-                            Text="Check the full details for next three departures from down below:"
+                            Text="Check the full details for the found departures from down below:"
                             TextColor="#FAFCFF" />
 
 
