@@ -48,10 +48,9 @@ namespace TravelMate.ViewModels
         
         public ResultsPageViewModel(UserSettingsService routeSettings)
         {
-            routeData = param;
-            resultText = new Editor();
-            _ = OnResultsPageLoadedAsync();
+            //_ = OnResultsPageLoadedAsync();
             routeData = routeSettings;
+            _ = OnResultsPageLoadedAsync();
             routeModels = new ObservableCollection<RouteModel>();
             BackClickCommand = new Command(Back);
             SelectRouteCommand = new Command<RouteModel>(ExecuteSelectedRoute);

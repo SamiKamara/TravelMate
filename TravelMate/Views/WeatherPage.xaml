@@ -4,8 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:TravelMate.ViewModels"
-    x:DataType="vm:WeatherPageViewModel"
     Title="WeatherPage"
+    x:DataType="vm:WeatherPageViewModel"
     BackgroundColor="{StaticResource DefaultBackgroundColor}">
 
     <ScrollView>
@@ -26,7 +26,7 @@
                     Margin="-10,0,0,0"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
-                    Clicked="OnBackButtonClicked"
+                    Command="{Binding BackClickCommand}"
                     HeightRequest="40"
                     HorizontalOptions="Start"
                     ImageSource="backbutton.png" />
@@ -79,7 +79,7 @@
                         <Label
                             FontAttributes="Bold"
                             LineBreakMode="TailTruncation"
-                            Text="{Binding From}" />
+                            Text="{Binding RouteData.From}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout
                         Grid.Column="0"
@@ -92,7 +92,7 @@
                         <Label
                             FontAttributes="Bold"
                             LineBreakMode="TailTruncation"
-                            Text="{Binding To}" />
+                            Text="{Binding RouteData.To}" />
                     </VerticalStackLayout>
 
                     <Image
@@ -113,7 +113,7 @@
                                     Text="Temperature"
                                     TextColor="#01BAE8"
                                     VerticalOptions="Center" />
-                                <Label Text="{Binding Temperature, StringFormat='{0}°C'}" />
+                                <Label Text="{Binding RouteData.Temperature, StringFormat='{0}°C'}" />
                             </VerticalStackLayout>
                         </StackLayout>
 
@@ -125,7 +125,7 @@
                                     Text="Chane Of Rain"
                                     TextColor="#01BAE8"
                                     VerticalOptions="Center" />
-                                <Label Text="{Binding RainChance, StringFormat='{0}%'}" />
+                                <Label Text="{Binding RouteData.RainChance, StringFormat='{0}%'}" />
                             </VerticalStackLayout>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Spacing="30">
@@ -136,7 +136,7 @@
                                     Text="Cloudiness"
                                     TextColor="#01BAE8"
                                     VerticalOptions="Center" />
-                                <Label Text="{Binding Cloudiness, StringFormat='{0}%'}" />
+                                <Label Text="{Binding RouteData.Cloudiness, StringFormat='{0}%'}" />
                             </VerticalStackLayout>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Spacing="30">
@@ -147,7 +147,7 @@
                                     Text="Wind Speed"
                                     TextColor="#01BAE8"
                                     VerticalOptions="Center" />
-                                <Label Text="{Binding WindSpeed, StringFormat='{0} m/s'}" />
+                                <Label Text="{Binding RouteData.WindSpeed, StringFormat='{0} m/s'}" />
                             </VerticalStackLayout>
                         </StackLayout>
                     </StackLayout>
@@ -161,14 +161,14 @@
                             Maximum="32"
                             Minimum="-32"
                             VerticalOptions="Center"
-                            Value="{Binding Temperature}" />
+                            Value="{Binding RouteData.Temperature}" />
 
                         <Slider
                             x:Name="RainSlider"
                             HorizontalOptions="FillAndExpand"
                             Maximum="100"
                             Minimum="0"
-                            Value="{Binding RainChance}" />
+                            Value="{Binding RouteData.RainChance}" />
 
                         <Slider
                             x:Name="CloudinessSlider"
@@ -176,7 +176,7 @@
                             Maximum="100"
                             Minimum="0"
                             VerticalOptions="Center"
-                            Value="{Binding Cloudiness}" />
+                            Value="{Binding RouteData.Cloudiness}" />
 
                         <Slider
                             x:Name="WindSpeedSlider"
@@ -184,12 +184,12 @@
                             Maximum="10.0"
                             Minimum="0"
                             VerticalOptions="Center"
-                            Value="{Binding WindSpeed}" />
+                            Value="{Binding RouteData.WindSpeed}" />
                     </StackLayout>
                     <Button
                         Grid.Column="4"
                         BackgroundColor="#44A5FF"
-                        Clicked="OnViewResultsClicked"
+                        Command="{Binding NextClickCommand}"
                         HorizontalOptions="End"
                         Text="Find Routes"
                         TextColor="#FAFCFF"

@@ -1,10 +1,9 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:TravelMate.ViewModels"
-             x:DataType="vm:ResultsPageViewModel"
-             x:Class="TravelMate.ResultsPage"
-             Title="ResultsPage"
-             BackgroundColor="{StaticResource DefaultBackgroundColor}">
+<ContentPage
+    x:Class="TravelMate.ResultsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="ResultsPage"
+    BackgroundColor="{StaticResource DefaultBackgroundColor}">
 
     <Grid>
 
