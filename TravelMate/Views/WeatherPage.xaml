@@ -43,7 +43,7 @@
                         CharacterSpacing="-1.2"
                         FontAttributes="Bold"
                         FontSize="30"
-                        Text="Choose the desired weather conditions on arrival" />
+                        Text="Choose the desired weather conditions on arrival:" />
                 </VerticalStackLayout>
 
                 <Image

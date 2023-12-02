@@ -31,14 +31,14 @@
                             FontAttributes="Bold"
                             FontSize="40"
                             HorizontalOptions="Start"
-                            Text="Here are the results for your search!"
+                            Text="Here Are The Results For Your Search!"
                             TextColor="#01BAE8" />
                         <Label
                             CharacterSpacing="-1.2"
                             FontAttributes="Bold"
                             FontSize="30"
                             HorizontalOptions="Start"
-                            Text="Down below are the next three departures, c"
+                            Text="Check the full details for next three departures from down below:"
                             TextColor="#FAFCFF" />
 
 
