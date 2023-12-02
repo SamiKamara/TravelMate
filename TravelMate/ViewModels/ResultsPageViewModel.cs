@@ -50,7 +50,21 @@ namespace TravelMate.ViewModels
         {
             routeData = routeSettings;
             routeModels = new ObservableCollection<RouteModel>();
+            BackClickCommand = new Command(Back);
             SelectRouteCommand = new Command<RouteModel>(ExecuteSelectedRoute);
+        }
+        public Command BackClickCommand { get; set; }
+
+        private async void Back()
+        {
+            try
+            {
+                await App.Current.MainPage.Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
         }
 
         private void ExecuteSelectedRoute(RouteModel selectedRoute)
@@ -137,7 +151,9 @@ namespace TravelMate.ViewModels
                         {
                             Mode = leg["mode"].ToString(),
                             StartTime = startTime.ToString("HH:mm"),
-                            Duration = duration.ToString("hh\\:mm")
+                            Duration = duration.ToString("hh\\:mm"),
+                            StartLocation = leg["from"]["name"].ToString(),
+                            EndLocation = leg["to"]["name"].ToString()
                         };
 
                         route.TransportModes.Add(transportMode);

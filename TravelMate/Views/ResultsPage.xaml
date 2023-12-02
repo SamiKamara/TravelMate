@@ -21,21 +21,30 @@
                         Margin="-10,0,0,0"
                         BackgroundColor="Transparent"
                         BorderWidth="0"
+                        Command="{Binding BackClickCommand}"
                         HeightRequest="40"
                         HorizontalOptions="Start"
                         ImageSource="backbutton.png" />
+                    <VerticalStackLayout Grid.Row="1" Margin="0,0,0,20">
+                        <Label
+                            CharacterSpacing="-1.2"
+                            FontAttributes="Bold"
+                            FontSize="40"
+                            HorizontalOptions="Start"
+                            Text="Here are the results for your search!"
+                            TextColor="#01BAE8" />
+                        <Label
+                            CharacterSpacing="-1.2"
+                            FontAttributes="Bold"
+                            FontSize="30"
+                            HorizontalOptions="Start"
+                            Text="Down below are the next three departures, c"
+                            TextColor="#FAFCFF" />
 
 
 
-                    <Label
-                        Grid.Row="1"
-                        Margin="0,0,0,20"
-                        CharacterSpacing="-0.6"
-                        FontAttributes="Bold"
-                        FontSize="32"
-                        HorizontalOptions="Start"
-                        Text="Results For Your Search"
-                        TextColor="#01BAE8" />
+                    </VerticalStackLayout>
+
                 </Grid>
 
                 <CollectionView ItemsSource="{Binding routeModels}">
@@ -56,49 +65,64 @@
                                     <Label
                                         Grid.Row="0"
                                         Grid.Column="0"
-                                        FontSize="24"
+                                        FontAttributes="Bold"
+                                        FontSize="22"
                                         Text="{Binding FormattedDate}"
                                         VerticalOptions="Center" />
 
-                                    <Grid Grid.Column="1" ColumnSpacing="30">
+                                    <Grid
+                                        Grid.Column="1"
+                                        ColumnSpacing="20"
+                                        VerticalOptions="Center">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <VerticalStackLayout Grid.Column="0">
+                                        <StackLayout Grid.Column="0" Orientation="Horizontal">
                                             <Image
+                                                Margin="0,0,10,0"
                                                 HeightRequest="25"
                                                 HorizontalOptions="Start"
                                                 Source="resultsiconstart.png" />
-                                            <Label
-                                                FontSize="16"
-                                                Text="{Binding From}"
-                                                TextColor="#01BAE8" />
-                                            <Label FontSize="14" Text="{Binding StartTime}" />
-                                        </VerticalStackLayout>
-                                        <VerticalStackLayout Grid.Column="1">
+                                            <VerticalStackLayout VerticalOptions="Center">
+                                                <Label
+                                                    FontSize="18"
+                                                    Text="{Binding From}"
+                                                    TextColor="#01BAE8" />
+                                                <Label FontSize="18" Text="{Binding StartTime}" />
+                                            </VerticalStackLayout>
+
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1" Orientation="Horizontal">
                                             <Image
+                                                Margin="0,0,10,0"
                                                 HeightRequest="25"
                                                 HorizontalOptions="Start"
                                                 Source="resultsicontime.png" />
-                                            <Label
-                                                FontSize="16"
-                                                Text="Duration"
-                                                TextColor="#01BAE8" />
-                                            <Label FontSize="14" Text="{Binding FormattedTotalTravelTime}" />
-                                        </VerticalStackLayout>
-                                        <VerticalStackLayout Grid.Column="2">
+                                            <VerticalStackLayout VerticalOptions="Center">
+                                                <Label
+                                                    FontSize="18"
+                                                    Text="Duration"
+                                                    TextColor="#01BAE8" />
+                                                <Label FontSize="18" Text="{Binding FormattedTotalTravelTime}" />
+                                            </VerticalStackLayout>
+
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2" Orientation="Horizontal">
                                             <Image
+                                                Margin="0,0,10,0"
                                                 HeightRequest="25"
                                                 HorizontalOptions="Start"
                                                 Source="reultsiconto.png" />
-                                            <Label
-                                                FontSize="16"
-                                                Text="{Binding To}"
-                                                TextColor="#01BAE8" />
-                                            <Label FontSize="14" Text="{Binding ArrivalTime}" />
-                                        </VerticalStackLayout>
+                                            <VerticalStackLayout VerticalOptions="Center">
+                                                <Label
+                                                    FontSize="18"
+                                                    Text="{Binding To}"
+                                                    TextColor="#01BAE8" />
+                                                <Label FontSize="18" Text="{Binding ArrivalTime}" />
+                                            </VerticalStackLayout>
+                                        </StackLayout>
                                     </Grid>
 
                                     <Button

@@ -27,6 +27,7 @@ namespace TravelMate
         {
             base.OnAppearing();
             NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);
             _ = OnResultsPageLoadedAsync();
         }
         private async Task OnResultsPageLoadedAsync()
@@ -52,11 +53,6 @@ namespace TravelMate
 
         private async void NavigateToRouteDetails(RouteModel routeModel)
         {
-
-            if (routeModel == null)
-            {
-                System.Diagnostics.Debug.WriteLine("Error: RouteModel is null");
-            }
             await Navigation.PushAsync(new DetailedPage(routeModel));
         }
     }

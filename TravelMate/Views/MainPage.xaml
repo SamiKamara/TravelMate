@@ -85,7 +85,7 @@
         </Grid>
 
         <Grid Grid.Column="1" VerticalOptions="FillAndExpand" Background="#212332">
-            <Image Source="main_right.png"
+            <Image Source="main_right_new.png"
                    Aspect="AspectFill"
                    VerticalOptions="Fill"
                    HorizontalOptions="StartAndExpand" />
