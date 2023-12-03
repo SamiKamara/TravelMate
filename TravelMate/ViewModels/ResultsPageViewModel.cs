@@ -80,37 +80,32 @@ namespace TravelMate.ViewModels
         {
             IsBusy = true;
 
+            double startLat = routeData.StartLocation["data"][0]["latitude"].Value<double>();
+            double startLon = routeData.StartLocation["data"][0]["longitude"].Value<double>();
 
-            JObject startLocation = await GeocodingHelper.GetLocation(routeData.From);
-            if (startLocation["data"] == null || !startLocation["data"].HasValues)
-            {
-                await DisplayAlert("Error", "Could not retrieve location data for the start address.", "OK");
-                return;
-            }
+            double endLat = routeData.EndLocation["data"][0]["latitude"].Value<double>();
+            double endLon = routeData.EndLocation["data"][0]["longitude"].Value<double>();
 
-            double startLat = startLocation["data"][0]["latitude"].Value<double>();
-            double startLon = startLocation["data"][0]["longitude"].Value<double>();
-
-            JObject endLocation = await GeocodingHelper.GetLocation(routeData.To);
-            if (endLocation["data"] == null || !endLocation["data"].HasValues)
-            {
-                await DisplayAlert("Error", "Could not retrieve location data for the end address.", "OK");
-                return;
-            }
-
-            double endLat = endLocation["data"][0]["latitude"].Value<double>();
-            double endLon = endLocation["data"][0]["longitude"].Value<double>();
             string inputWeatherData = ExtractInputFieldsData();
 
             JObject route = await DigitransitHelper.GetRoute(startLat, startLon, endLat, endLon);
 
-            var routeInfo = await GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon, routeData);
+            bool isValid = DataValidator.ValidateRoute(route);
 
-            var sortedRouteInfo = routeInfo.OrderByDescending(route => route.Date.Date == DateTime.Today).ThenBy(route => route.Date).ThenBy(route => route.StartTime).ToList();
-
-            foreach (var routeModel in sortedRouteInfo)
+            if (isValid)
             {
-                routeModels.Add(routeModel);
+                var routeInfo = await GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon, routeData);
+
+                var sortedRouteInfo = routeInfo.OrderByDescending(route => route.Date.Date == DateTime.Today).ThenBy(route => route.Date).ThenBy(route => route.StartTime).ToList();
+
+                foreach (var routeModel in sortedRouteInfo)
+                {
+                    routeModels.Add(routeModel);
+                }
+
+            } else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Could not retrieve route data for given addresses, please return and change them.", "OK");
             }
 
             IsBusy = false;
@@ -196,55 +191,6 @@ namespace TravelMate.ViewModels
             return routes;
         }
 
-        private Task DisplayAlert(string v1, string v2, string v3)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task GetLocationAsync(Editor resultEditor, string streetAddressInput)
-        {
-            resultEditor.Text = "";
-
-            if (string.IsNullOrEmpty(streetAddressInput))
-            {
-                await DisplayAlert("Error", "Please enter the street address.", "OK");
-                return;
-            }
-
-            JObject location = await GeocodingHelper.GetLocation(streetAddressInput);
-
-            // For demonstration purposes, display the raw JSON.
-            resultEditor.Text = location.ToString();
-        }
-
-        public async Task GetWeatherAsync(Editor resultEditor, string streetAddressInput)
-        {
-            resultEditor.Text = "";
-
-            if (string.IsNullOrEmpty(streetAddressInput))
-            {
-                await DisplayAlert("Error", "Please enter the street address.", "OK");
-                return;
-            }
-
-            JObject location = await GeocodingHelper.GetLocation(streetAddressInput);
-            if (location["data"] != null && location["data"].HasValues)
-            {
-                double lat = location["data"][0]["latitude"].Value<double>();
-                double lon = location["data"][0]["longitude"].Value<double>();
-
-                JObject weather = await WeatherHelper.GetWeather(lat, lon);
-
-                string extractedWeatherInfo = ExtractWeatherData(weather.ToString());
-
-                resultEditor.Text = extractedWeatherInfo + "\n\n" + weather.ToString();
-            }
-            else
-            {
-                await DisplayAlert("Error", "Could not retrieve location data.", "OK");
-            }
-        }
-
         public static string ExtractWeatherData(string jsonInput)
         {
             JObject jsonData = JObject.Parse(jsonInput);
@@ -277,7 +223,6 @@ namespace TravelMate.ViewModels
             return intValue.ToString("D3");
         }
 
-        // For debugging, these will later come from sliders on weatherpage
         public string ExtractInputFieldsData()
         {
             double tempValue = double.TryParse(routeData.Temperature.ToString(), out var tempResult) ? tempResult : 0;
@@ -325,27 +270,13 @@ namespace TravelMate.ViewModels
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.Message, "OK");
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
 
         private async Task OnResultsPageLoaded()
         {
             await GetRouteAsync();
-        }
-
-        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!int.TryParse(e.NewTextValue, out int result))
-            {
-                ((Entry)sender).Text = e.OldTextValue;
-                return;
-            }
-
-            if (result < 0 || result > 100)
-            {
-                ((Entry)sender).Text = e.OldTextValue;
-            }
         }
     }
 }
