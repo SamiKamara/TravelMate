@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 
@@ -12,6 +13,8 @@ namespace TravelMate.Services
         private int rainChance;
         private int cloudiness;
         private double windSpeed;
+        private JObject startLocation;
+        private JObject endLocation;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -108,6 +111,30 @@ namespace TravelMate.Services
             rainChance = 0;
             cloudiness = 0;
             windSpeed = 0.0;
+        }
+
+        public JObject StartLocation
+        {
+            get { return startLocation; }
+            set
+            {
+                if (startLocation != value)
+                {
+                    startLocation = value;
+                }
+            }
+        }
+
+        public JObject EndLocation
+        {
+            get { return endLocation;}
+            set
+            {
+                if (endLocation != value)
+                {
+                    endLocation = value;
+                }
+            }
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
