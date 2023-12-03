@@ -45,10 +45,9 @@ namespace TravelMate.ViewModels
                 }
             }
         }
-        
+
         public ResultsPageViewModel(UserSettingsService routeSettings)
         {
-            //_ = OnResultsPageLoadedAsync();
             routeData = routeSettings;
             _ = OnResultsPageLoadedAsync();
             routeModels = new ObservableCollection<RouteModel>();
@@ -69,18 +68,18 @@ namespace TravelMate.ViewModels
             }
         }
 
-        private void ExecuteSelectedRoute(RouteModel selectedRoute)
+        private async void ExecuteSelectedRoute(RouteModel selectedRoute)
         {
-            OnRouteSelected?.Invoke(selectedRoute);
+            DetailedPageViewModel viewModel = new DetailedPageViewModel(selectedRoute);
+            await App.Current.MainPage.Navigation.PushAsync(new DetailedPage(viewModel));
         }
 
-        public Action<RouteModel> OnRouteSelected { get; set;}
+        public Action<RouteModel> OnRouteSelected { get; set; }
 
         public async Task GetRouteAsync()
         {
             IsBusy = true;
-            IsDataLoaded = false;
-            
+
 
             JObject startLocation = await GeocodingHelper.GetLocation(routeData.From);
             if (startLocation["data"] == null || !startLocation["data"].HasValues)
@@ -102,20 +101,19 @@ namespace TravelMate.ViewModels
             double endLat = endLocation["data"][0]["latitude"].Value<double>();
             double endLon = endLocation["data"][0]["longitude"].Value<double>();
             string inputWeatherData = ExtractInputFieldsData();
-            
+
             JObject route = await DigitransitHelper.GetRoute(startLat, startLon, endLat, endLon);
-            
+
             var routeInfo = await GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon, routeData);
-            
+
             var sortedRouteInfo = routeInfo.OrderByDescending(route => route.Date.Date == DateTime.Today).ThenBy(route => route.Date).ThenBy(route => route.StartTime).ToList();
-            
+
             foreach (var routeModel in sortedRouteInfo)
             {
                 routeModels.Add(routeModel);
             }
-            
+
             IsBusy = false;
-            IsDataLoaded = true;
         }
 
         // This function demonstrates how to get the wanted data for routes
@@ -125,14 +123,14 @@ namespace TravelMate.ViewModels
         {
             var jObject = JObject.Parse(json);
             var routes = new List<RouteModel>();
-            
+
             foreach (var itinerary in jObject["data"]["plan"]["itineraries"])
             {
                 var route = new RouteModel();
-                              
+
                 DateTimeOffset? itineraryStartTime = null;
                 DateTimeOffset? itineraryEndTime = null;
-               
+
                 foreach (var leg in itinerary["legs"])
                 {
                     if (leg.Value<bool>("transitLeg"))
@@ -148,7 +146,7 @@ namespace TravelMate.ViewModels
 
                         itineraryStartTime ??= startTime;
                         itineraryEndTime = endTime;
-                        
+
                         var transportMode = new TransportMode
                         {
                             Mode = leg["mode"].ToString(),
@@ -166,7 +164,7 @@ namespace TravelMate.ViewModels
                 if (itineraryStartTime.HasValue && itineraryEndTime.HasValue)
                 {
                     string arrivalTime = itineraryEndTime.Value.ToString("HH:mm");
-                    
+
                     // Get weather data for the end location at the arrival time
                     JObject forecastData = await WeatherHelper.GetWeatherForGivenTime(endLat, endLon, arrivalTime);
                     string endWeatherData = ExtractWeatherData(forecastData.ToString());
@@ -191,10 +189,10 @@ namespace TravelMate.ViewModels
                     route.InputRainChance = routeData.RainChance;
                     route.InputCloudiness = routeData.Cloudiness;
                     route.InputWindSpeed = routeData.WindSpeed;
-                   
+
                     routes.Add(route);
                 }
-            }        
+            }
             return routes;
         }
 
@@ -351,4 +349,3 @@ namespace TravelMate.ViewModels
         }
     }
 }
-

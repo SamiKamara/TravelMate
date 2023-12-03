@@ -15,19 +15,6 @@ namespace TravelMate
     {
         private RouteModel routeModel;
 
-        public RouteModel RouteModel
-        {
-            get => routeModel;
-            set
-            {
-                if (routeModel != value)
-                {
-                    routeModel = value;
-                    OnPropertyChanged(nameof(RouteModel));
-                }
-            }
-        }
-
         public DetailedPageViewModel(RouteModel route)
         {
             routeModel = route;
