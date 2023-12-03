@@ -94,8 +94,6 @@ namespace TravelMate.ViewModels
 
             if (isValid)
             {
-                //var routeInfo = await GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon, routeData);
-
                 var routeInfo = await ModelLogic.GetCompactPublicTransportRoute(route.ToString(), inputWeatherData, endLat, endLon, routeData);
 
                 var sortedRouteInfo = routeInfo.OrderByDescending(route => route.Date.Date == DateTime.Today).ThenBy(route => route.Date).ThenBy(route => route.StartTime).ToList();
