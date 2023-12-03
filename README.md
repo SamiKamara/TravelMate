@@ -1,5 +1,7 @@
 # Travelmate
 
+TravelMate integrates three distinct third-party APIs to create an application that assists you in checking weather conditions while traveling. You can specify your departure and destination locations, customize preferences for temperature, rainfall, cloud cover, and wind conditions. Explore the conditions of each result and select the one that best suits your preferences. Enjoy a personalized travel experience with TravelMate!
+
 ## How to run software
 #### Prerequirement
 - Visual Studio 2022 (Comminity), _or other similar IDE_
@@ -16,7 +18,6 @@
 Check our youtube video: https://www.youtube.com/watch?v=RF061WbnHsI
 
 Check design document pdf for more details :) 
-
 
 ## Figma project
 [Link to Figma](https://www.figma.com/file/8b9qmNP1ifnLdsHGfHe1xD/Ohj_suunn_proju?type=design&node-id=18%3A2&mode=design&t=rb5EPVlJeZV8ojdf-1)
