@@ -39,18 +39,18 @@ namespace TravelMate.ViewModels
             }
 
             JObject startLocation = await GeocodingHelper.GetLocation(routeData.From);
-            if (startLocation["data"] == null || !startLocation["data"].HasValues)
-            {
-                return false;
-            }
-
             JObject endLocation = await GeocodingHelper.GetLocation(routeData.To);
-            if (endLocation["data"] == null || !endLocation["data"].HasValues)
+
+            bool isValid = DataValidator.ValidateLocation(startLocation, endLocation);
+
+            if (isValid)
             {
-                return false;
+                RouteData.StartLocation = startLocation;
+                RouteData.EndLocation = endLocation;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public void SavePreferences()
