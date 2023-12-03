@@ -2,6 +2,10 @@
 
 TravelMate integrates three distinct third-party APIs to create an application that assists you in checking weather conditions while traveling. You can specify your departure and destination locations, customize preferences for temperature, rainfall, cloud cover, and wind conditions. Explore the conditions of each result and select the one that best suits your preferences. Enjoy a personalized travel experience with TravelMate!
 
+## Disclaimer
+
+API keys are hardcoded into the code, which is not ideal. This is a result of course requirements that stipulate the software must be executable without requiring registration for any services to obtain API keys. :)
+
 ## How to run software
 #### Prerequirement
 - Visual Studio 2022 (Comminity), _or other similar IDE_
